@@ -18,83 +18,9 @@ The first-order theory of the reals admits a constructive method for quantifier 
 
 From~\cref{thm:tarski}, it follows that the semi-algebraic sets are precisely the first-order definable sets (that is, the use of quantifiers does not augment the class of semi-algebraic sets).
 
-We also remark that our standard representation of algebraic numbers, described in~\cref{sec:alg_num_rep}, allows us to write them explicitly in the first-order theory of the reals, that is, given $\alpha\in\Algebraics$, there exists a sentence $\sigma(x)$ such that $\sigma(x)$ is true if and only if $x=\alpha$. Thus, we allow their use when defining semi-algebraic sets, for simplicity.
+We also remark that the standard representation of algebraic numbers\footnote{This consists of their defining polynomial together with a numeric rational approximation of the root and an upper bound on the approximation error that distinguishes it from other roots.} allows us to write them explicitly in the first-order theory of the reals, that is, given $\alpha\in\Algebraics$, there exists a sentence $\sigma(x)$ such that $\sigma(x)$ is true if and only if $x=\alpha$. Thus, we allow their use when defining semi-algebraic sets, for simplicity.
 
 The complexity class $\exists\Reals$ is defined as the set of problems having a polynomial-time many-one reduction to the existential theory of the reals. It was shown in~\cite{Canny88} that $\exists\Reals\subseteq \PSPACE$.
-
-The reader seeking a comprehensive study of the computational complexity of quantifier elimination may refer to~\cite{Renegar} and~\cite{BPR06}. We shall make use of the following result by Basu, Pollack, and Roy
-\cite{BasuPR96}, which provides an upper bound on the space complexity of quantifier elimination:
-
-\begin{theorem}
-\label{thm:quant-elim}
-Given a set $\mathcal{Q}=\lbrace q_1,\ldots,q_s\rbrace$ of $s$   polynomials each of degree at most $D$, in $h+d$ variables, and a first-order formula
-\begin{equation*}
-  \Phi(\myvector x)=Q y_1 \ldots Q y_h   F(q_1(\myvector x,\myvector y),\ldots,q_s(\myvector x,\myvector y)) \, ,
-\end{equation*}
-where $Q\in\lbrace \exists,\forall\rbrace$, $F$ is a quantifier-free Boolean combination with atomic elements of the form $q_i(\myvector x,\myvector y)\sim 0$, where $\sim \in \lbrace >, = \rbrace$, there exists a quantifier-free formula
-\begin{equation*}
-\Psi(\myvector{x}) = \bigwedge_{i=1}^{I} \bigvee_{j=1}^{J_i} q_{ij}(\myvector{x}) \sim 0 \, ,
-\end{equation*}
-where $I\leq {(sD)}^{O(hd)}$, each $J_{i}\leq {(sD)}^{O(d)}$, the degrees of the   polynomials $q_{ij}$ are bounded by $D^{d}$, and the bit-sizes of the heights of the polynomials in the quantifier-free formula are only   polynomially larger than those of $q_1,\ldots,q_s$.
-\end{theorem}
-
-We also make use of the following lemmas:
-\begin{lemma}
-  If $X\subseteq\Reals^{d}$ is semi-algebraic and non-empty, then
-  $X\cap\Algebraics^{d}\neq\emptyset$.
-\end{lemma}
-
-\begin{proof}
-  We prove this result by strong induction on $d$. Since $X$ is
-  semi-algebraic, there exists a quantifier-free sentence in the
-  first-order theory of the reals $\sigma$ such that $X=\lbrace
-  x\in\Reals^{d}\mid \sigma(x)\rbrace$.
-
-  Suppose that $d>1$. Letting $X_1=\lbrace x_d\in\Reals\mid
-  \exists
-  x_1,\ldots,x_{d-1}\in\Reals^{d-1},\sigma(x_1,\ldots,x_d)\rbrace$
-  and since $X_1\neq\emptyset$ is semi-algebraic, by the induction
-  hypothesis, there must be $x_d^*\in\Algebraics\cap X_1$. Moreover, we
-  can define $X_2=\lbrace (x_2,\ldots,x_d)\in\Reals^{d-1}\mid
-  \sigma(x_1^*,x_2,\ldots,x_n)\rbrace$, which is non-empty and
-  semi-algebraic, and again by the induction hypothesis there exists some
-  $(x_2^*,\ldots,x_d^*)\in\Algebraics^{d-1}\cap X_2$.
-
-  It remains to prove this statement for $d=1$. In that case, $X$ must
-  be a finite union of intervals and points.
-  Clearly $\Algebraics$ is dense in any interval, and each of these isolated
-  points $x$ corresponds to some constraint $g(x)=0$, which implies
-  that $x$ must be algebraic, since $g$ has integer coefficients.
-\end{proof}
-
-\begin{lemma}
-\label{lem:semi-alg-density}
-If $X\subseteq\Reals^{d}$ is semi-algebraic, then $X\cap\Algebraics^{d}$ is dense in $X$.
-\end{lemma}
-
-\begin{proof}
-  Pick $x\in X$ and $\varepsilon>0$ arbitrarily. Let
-  $y\in\Rationals^{d}$ be such that $\| x-y \|<\varepsilon/2$. Since
-  $B(y,\varepsilon/2)$ is semi-algebraic, so must be $X\cap
-  B(y,\varepsilon/2)$, and so this set must contain an algebraic
-  point, since it is nonempty ($x$ is in it), and that point must
-  therefore be at distance at most $\varepsilon$ from $x$, by the
-  triangle inequality.
-\end{proof}
-
-\begin{lemma}
-\label{lem:semi-alg-closure}
-If $X\subseteq\Reals^{d}$ is semi-algebraic, then so is $\closure{X}$\footnote{$\closure{X}$ denotes the topological closure of $X$.}.
-\end{lemma}
-
-\begin{proof}
-  Let $\sigma$ be a sentence in the first-order theory of the reals such
-  that $X=\lbrace x\in\Reals^{d}\mid \sigma(x)\rbrace$. Whence
-\begin{equation*}
-  \closure{X}=\lbrace x\in\Reals^{d}\mid
-\forall \varepsilon>0,\exists y\in\Reals^{d},\sigma(y)\wedge y\in B(x,\varepsilon) \rbrace .
-\end{equation*}
-\end{proof}
 
 Finally, we will need the following theorem, shown by MacIntyre and Wilkie~\cite{WM}, concerning the decidability of the extension of the first-order theory of the reals with real exponentiation and bounded $\sin$ and $\cos$ functions.
 \begin{theorem}[Wilkie and MacIntyre]
