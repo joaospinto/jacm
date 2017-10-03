@@ -1,4 +1,4 @@
-\subsection{Transcendental Number Theory}
+\subsubsection{Transcendental Number Theory}
 
 %We will need the following results of Baker~\cite{Baker75}.
 %The first one, together with Masser's theorem, allows us
@@ -11,7 +11,8 @@ A number of the form
 \end{equation*}
 where $\alpha_{0}, \ldots, \alpha_{n}, \beta_{1}, \ldots, \beta_{n}$ are algebraic numbers, is said to be a \emph{linear form in logarithms of algebraic numbers}. Note that the set of linear forms in logarithms of algebraic numbers is closed under addition and under multiplication by algebraic numbers, as well as under complex conjugation.
 
-The following result, together with \cref{thm:masser}, yields a method for comparing linear forms in logarithms of algebraic numbers. Note that there are other theorems by Alan Baker that would allow us to do this directly, namely by providing lower bounds on the absolute value of non-zero linear forms in logarithms of algebraic numbers as a function of the degrees and heights of the defining polynomials of the algebraic numbers appearing therein; for simplicity, we will not discuss these results in this thesis. For a proof, see~\cite{Baker75} and~\cite{BW93}.
+The following result, together with \cref{thm:masser}, yields a method for comparing linear forms in logarithms of algebraic numbers. Note that there are other theorems by Alan Baker that would allow us to do this directly, namely by providing lower bounds on the absolute value of non-zero linear forms in logarithms of algebraic numbers as a function of the degrees and heights of the defining polynomials of the algebraic numbers appearing therein; for simplicity, we will not discuss
+these results in this paper. For a proof, see~\cite{Baker75} and~\cite{BW93}.
 
 \begin{theorem}[Baker]
 \label{thm:Baker}
@@ -51,7 +52,7 @@ If $\alpha \in \Algebraics \setminus \lbrace 0 \rbrace$, then $e^{\alpha}$ is tr
 We will later present a result that holds if the following conjecture, which generalises many other theorems from transcendental number theorem (including Baker's theorem and the Lindemann-Weierstrass theorem), is true.
 
 \begin{conjecture}[Schanuel]
-  If $\alpha_{1}, \ldots, \alpha_{m} \in \Complex$ are linearly independent over $\Rationals$, then $\Rationals(\alpha_{1}, \exp(\alpha_{1}), \ldots, \alpha_{m}, \exp(\alpha_{m}))$ has transcendence degree at least $m$.
+    If $\alpha_{1}, \ldots, \alpha_{m} \in \Complex$ are linearly independent over $\Rationals$, then \[\Rationals(\alpha_{1}, \exp(\alpha_{1}), \ldots, \alpha_{m}, \exp(\alpha_{m}))\] has transcendence degree at least $m$.
 \end{conjecture}
 Note that the transcendence degree of a field extension of $\Rationals$ is the cardinality of the largest algebraically independent subset thereof, so having transcendence degree at least $m$ means that there is a set of at least $m$ elements that satisfies no non-zero polynomial relation with integer coefficients.
 Whilst we will not make use of this conjecture directly, we will use~\cref{thm:wilkie-macintyre}, which does rely on Schanuel's conjecture being true. Obviously, all conditional results will be marked as such.

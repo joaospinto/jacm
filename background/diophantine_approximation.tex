@@ -1,11 +1,11 @@
-\subsection{Diophantine Approximation}
+\subsubsection{Diophantine Approximation}
 
 The following result, due to Leopold Kronecker, on simultaneous Diophantine approximation, generalises Dirichlet's Approximation Theorem. We denote the \emph{group of additive relations} of $\myvector{v} \in \Complex^{d}$ by
 \begin{align*}
 \cA(\myvector{v}) = \lbrace \myvector{z} \in \Integers^{d} : \myvector{z} \cdot \myvector{v} \in \Integers \rbrace .
 \end{align*}
 
-Throughout this thesis, $\dist$ refers to the $l_{1}$ distance.
+Throughout this paper, $\dist$ refers to the $l_{1}$ distance.
 
 \begin{theorem}[Kronecker]
 \label{thm:Kronecker}
@@ -25,7 +25,7 @@ Let $\myvector{\alpha}_{1}, \ldots, \myvector{\alpha_{k}} \in \Reals^{d}$ and $\
 A proof of this result can be found in~\cite{Cassels}.
 Note that the second condition essentially states that all the integer relations that are satisfied by all the $\myvector{\alpha}_{i}$ are also satisfied by $\myvector{\beta}$.
 
-We will also need the following result, which is a weak form of~\cite[Corollary 2.8]{KhachiyanP97}.
+We shall not need to use~\cref{thm:Kronecker}\footnote{In fact, we mistakenly used~\cref{thm:Kronecker} in lieu of~\cref{thm:kp-density} in~\cite{LICS16}; this paper fixes the error introduced by that mistake.}; instead, we will use the following less known result, which is a weak form of~\cite[Corollary 2.8]{KhachiyanP97}.
 
 \begin{theorem}
 \label{thm:kp-density}

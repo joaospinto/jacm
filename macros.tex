@@ -1,34 +1,3 @@
-\theoremstyle{plain}
-%\newtheorem{theorem}{Theorem}
-%\newtheorem{lemma}[theorem]{Lemma}
-%\newtheorem{proposition}[theorem]{Proposition}
-%\newtheorem{corollary}[theorem]{Corollary}
-%\newtheorem{conjecture}[theorem]{Conjecture}
-
-%\theoremstyle{definition}
-%\newtheorem{definition}{Definition}
-
-%\theoremstyle{remark}
-%\newtheorem*{remark}{Remark}
-%\newtheorem*{example}{Example}
-
-%BEGIN_MACRO
-
-\newcounter{term}
-\renewcommand*{\theterm}{\Alph{term}}
-\newcommand*{\termcrefname}{term}
-\AtBeginDocument{%
-  \let\mylabel\label
-}
-\newcommand{\mytag}[1]{%
-  \begingroup % keep the effects of \refstepcounter local
-    \refstepcounter{term}%
-    \mylabel{#1}%
-    \text{\theterm}%
-  \endgroup
-}
-%END_MACRO
-
 \DeclarePairedDelimiter{\diagfences}{(}{)}
 \newcommand{\diag}{\operatorname{diag}\diagfences}
 
