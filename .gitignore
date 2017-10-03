@@ -1,0 +1,12 @@
+*~
+*.aux
+*.bbl
+*.blg
+*.lof
+*.log
+*.out
+*.pdf
+*.toc
+*.synctex.gz
+.nfs*
+acmart/*.*

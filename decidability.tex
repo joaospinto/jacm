@@ -1,0 +1,261 @@
+\section{Decidability in the Commutative Case}
+\label{sec:lics_decidability}
+
+We start this section by reducing the Generalised MEP with commuting
+matrices to LEP \@. The intuition behind it is quite simple: perform a
+change of basis so that the matrices $A_{1}, \ldots, A_{k}$, as well
+as $C$, become block-diagonal matrices, with each block being upper
+triangular; we can then separate the problem into several
+sub-instances, corresponding to the diagonal blocks, and finally make
+use of our uniqueness result concerning strictly upper triangular
+logarithms of upper unitriangular matrices, established in \cref{thm:log_uniqueness}.
+
+\begin{theorem}
+The Generalised MEP with commuting matrices reduces to LEP \@.
+\end{theorem}
+
+\begin{proof}
+  Consider an instance of the generalised MEP, as given in \cref{def:MEP},
+  with commuting $n\times n$ matrices $A_1,\ldots,A_k$ and target
+  matrix $C$.
+
+  We first show how to define a matrix $P$ such that each matrix
+  $P^{-1} A_{i} P$ is block diagonal, $i=1,\ldots,k$, with each block
+  being moreover upper triangular.
+
+  By \cref{subspace_decomposition} we can write $\Complex^n$
+  as a direct sum of subspaces $\Complex^n = \oplus_{j=1}^b \mathcal{V}_j$
+  such that for every subspace $\mathcal{V}_j$ and matrix $A_i$, $\mathcal{V}_j$ is an
+  invariant subspace of $A_i$ on which $A_i$ has a single eigenvalue
+  $\lambda_i^{(j)}$.
+
+  Define a matrix $Q$ by picking an algebraic basis for each
+  $\mathcal{V}_j$ and successively taking the vectors of each basis to
+  be the columns of $Q$. Then, each matrix $Q^{-1} A_{i} Q$ is
+  block-diagonal, where the $j$-th block is a matrix $B^{(j)}_i$ that
+  represents $A_{i} \restriction{\mathcal{V}_j}$, $j=1,\ldots,b$.
+
+  Fixing $j\in \lbrace 1,\ldots,b \rbrace$, note that the
+  matrices $B_1^{(j)},\ldots,B_k^{(j)}$ all commute.  Thus we
+  may apply \cref{thm:simultaneous-triangularisation} to obtain an
+  algebraic matrix $M_j$ such that each matrix $M_j^{-1} B^{(j)}_{i} M_j$
+  is upper triangular, $i=1,\ldots,k$.  Thus we can write
+  \[ M_j^{-1} B^{(j)}_{i} M_j = \lambda_i^{(j)}I + N_i^{(j)} \]
+  for some strictly upper triangular matrix $ N_i^{(j)}$.
+
+  We define $M$ to be the block-diagonal matrix with blocks $M_1,\ldots,M_b$.
+  Letting $P=QM$, it is then the case
+  that $P^{-1} A_{i} P$ is block-diagonal, with the $j$-th block being
+  $\lambda_i^{(j)}I + N_i^{(j)}$ for $j=1,\ldots,b$.  Now
+\begin{align}
+\prod \limits_{i=1}^{k} \exp(A_{i} t_{i}) = C \Leftrightarrow \prod \limits_{i=1}^{k} \exp(P^{-1}A_{i}P t_{i}) = P^{-1}CP .
+\label{eq:block}
+\end{align}
+
+If $P^{-1}CP$ is not block-diagonal, with each block being upper
+triangular and with the same entries along the diagonal, then Equation
+(\ref{eq:block}) has no solution and the problem instance must be
+negative. Otherwise, denoting the blocks $P^{-1}CP$ by $D^{(j)}$ for
+$j \in \lbrace 1, \ldots, b \rbrace$, our problem amounts to
+simultaneously solving the system of matrix equations
+\begin{align}
+\prod\limits_{i=1}^{k} \exp\big(\big(\lambda_i^{(j)}I + N_i^{(j)}\big)t_{i}\big) = D^{(j)}, \quad j \in \lbrace 1, \ldots, b \rbrace
+\label{eq:main1}
+\end{align}
+with one equation for each block.
+
+For each fixed $j$, the matrices $N_{i}^{(j)}$ inherit commutativity from
+the matrices $B^{(j)}_{i}$, so we have
+\begin{align*}
+\prod\limits_{i=1}^{k} \exp((\lambda_i^{(j)}I + N_i^{(j)})t_{i}) &=
+   \exp\big(\sum_{i=1}^{k} (\lambda_i^{(j)}I  +
+ N_i^{(j)}) t_i \big)\\
+&= \exp\big(\sum_{i=1}^{k} \lambda_i^{(j)} t_i\big) \cdot
+   \exp\big(\sum_{i=1}^{k} N_i^{(j)} t_i \big) .
+\end{align*}
+
+Hence the system (\ref{eq:main1}) is equivalent to
+\begin{align}
+\exp\big(\sum_{i=1}^{k} \lambda_i^{(j)} t_i\big) \cdot
+   \exp\big(\sum_{i=1}^{k} N_i^{(j)} t_i \big)  = D^{(j)}
+\label{eq:main2}
+\end{align}
+for $j=1,\ldots,b$.
+
+By assumption, the diagonal entries of each matrix $D^{(j)}$ are
+equal to a unique value, say $c^{(j)}$.
+Since the diagonal entries of
+$\exp\left(\sum_{i=1}^{k} N^{(j)}t_i\right)$
+are all $1$, the equation system (\ref{eq:main2}) is equivalent to:
+\begin{align*}
+\exp\big(\sum_{i=1}^{k} \lambda_i^{(j)} t_i\big)
+= c^{(j)} \mbox{ and }\exp\big(\sum_{i=1}^{k} N_i^{(j)} t_i \big)
+=\frac{1}{c^{(j)}} D^{(j)}
+\end{align*}
+for $j=1,\ldots,b$.
+
+Applying \cref{thm:log_uniqueness}, the
+above system can equivalently be written
+\begin{align*}
+\exp\big(\sum_{i=1}^{k} \lambda_i^{(j)} t_i\big)
+= c^{(j)} \mbox{ and } \sum_{i=1}^{k}
+N_i^{(j)} t_i =
+S^{(j)}
+\end{align*}
+for  some effectively computable matrix
+$S^{(j)}$ with algebraic entries, $j=1,\ldots,b$.
+
+Except for the additional linear equations, this has the form of an
+instance of LEP\@.
+ However we can eliminate the linear equations by
+performing a linear change of variables, i.e., by computing the
+solution of the system in parametric form.  Thus we finally arrive at
+an instance of LEP\@.
+\end{proof}
+
+
+In the following result, we essentially solve the system of equations~\eqref{single_eqn_form}, reducing it to the simpler problem that really lies at its heart.
+
+\begin{theorem}
+\label{reference-for-log}
+LEP reduces to ALIP\@.
+\end{theorem}
+
+\begin{proof}
+Consider an instance of LEP, comprising a system of equations
+\begin{align}
+ \exp\left(\sum_{\ell=1}^{k} \lambda_\ell^{(j)} t_{\ell} \right) = c_j \exp (d_j)
+\quad j=1,\ldots,b,
+\label{eq:LEPinstance}
+\end{align}
+and polytope $\mathcal{P}\subseteq \Reals^{2k}$, as described in
+\cref{def:LEP}.
+
+Throughout this proof, let $\log$ denote a fixed logarithm branch that
+is defined on all the numbers $c_j, \exp(d_j)$ appearing
+above, and for which $\log(-1) = i \pi$. Note that if any $c_j=0$ for
+some $j$ then (\ref{eq:LEPinstance}) has no solution. Otherwise, by
+applying $\log$ to each equation in (\ref{eq:LEPinstance}),
+we get
+\begin{align}
+\sum_{\ell=1}^{k} \lambda_\ell^{(j)} t_{\ell} = d_j+\log(c_j) + 2i\pi n_j \quad j=1,\ldots,b,
+\label{eq:logs}
+\end{align}
+where $n_j \in \Integers$.
+
+The system of equations (\ref{eq:logs}) can be written in matrix form as
+\begin{align*}
+A \myvector{t} \in \myvector{d}+\log(\myvector{c}) +
+2i\pi \Integers^b \, ,
+\end{align*}
+where $A$ is the $b\times k$ matrix with $A_{j,\ell} = \lambda_\ell^{(j)}$ and $\log$
+is applied pointwise to vectors.
+Now, defining the convex polytope $\mathcal{Q}\subseteq \Reals^{2b}$ by
+\begin{align*}
+\mathcal{Q} = \lbrace &(\Re(A\myvector{y}), \Im(A\myvector{y})) :
+\myvector{y}\in\Complex^{k}, (\Re(\myvector{y}), \Im(\myvector{y})) \in \mathcal{P} \rbrace \, ,
+\end{align*}
+it suffices to decide whether the set
+$\myvector{d} + \log(\myvector{c})+ 2i\pi  \Integers^b$
+intersects
+$\lbrace \myvector{x} \in \Complex^b : (\Re(\myvector{x}),
+\Im(\myvector{x})) \in \mathcal{Q} \rbrace$.
+
+Define $f:\Reals^b \rightarrow \Complex^b$ by
+$f(\myvector{v})= \myvector{d} + \log(\myvector{c}) +
+2i\pi \myvector{v}$,
+and define a convex polytope $\mathcal{T}\subseteq \Reals^b$ by
+\[\mathcal{T}=\lbrace \myvector{v}\in\Reals^b : (\Re(f(\myvector{v})),
+\Im (f(\myvector{v}))) \in \mathcal{Q} \rbrace \, . \]
+
+The problem then amounts to deciding whether the convex polytope
+$\mathcal{T}$ contains an integer point. Crucially, the
+description of the convex polytope $\mathcal{T}$ is of the form
+$\pi B\myvector{x} \leq \myvector{b}$, for some matrix $B$ and
+vector $\myvector{b}$ such that the entries of $B$ are real
+algebraic and the components of $\myvector{b}$ are real linear forms
+in logarithms of algebraic numbers.  But this is the form of an
+instance of ALIP \@.
+\end{proof}
+
+We are left with the task of showing that ALIP is decidable. The argument essentially consists of reducing to a lower-dimensional instance whenever possible, and eventually either using the fact that the polytope is bounded to test whether it intersects the integer lattice or using \cref{thm:kp-density} to show that, by a density argument, it must intersect the integer lattice.
+
+\begin{theorem}
+ALIP is decidable.
+\end{theorem}
+
+\begin{proof}
+We are given a convex polytope $\mathcal{P}=\lbrace \myvector{x} \in \Reals^{d} : \pi A \myvector{x} \leq \myvector{b} \rbrace$, where the coordinates $\myvector{b}$ are linear forms in logarithms of algebraic numbers, and need to decide whether this polytope intersects $\Integers^{d}$. Throughout this proof, $\log$ denotes the logarithm branch picked at the beginning of the proof of \cref{reference-for-log}.
+We start by eliminating linear dependencies between the logarithms appearing in the vector $\myvector{b}$, using Masser's Theorem.
+For example, suppose that
+\begin{align*}
+b_{i} = r_{0} + r_{1} \log(s_{1}) + \cdots + r_{k} \log(s_{k}), \quad r_{0}, r_{1}, s_{1}, \ldots, r_{k}, s_{k} \in \Algebraics.
+\end{align*}
+Due to~\cref{thm:Baker}, there exists a non-trivial linear relation with algebraic coefficients amongs $\log(-1), \log(s_{1}), \ldots, \log(s_{k})$ if and only if there is one with integer coefficients. But such integer relations can be computed, since
+\begin{align*}
+&n_{0} \log(-1) + n_{1} \log(s_{1}) + \cdots + n_{k} \log(s_{k}) = 0 \Leftrightarrow \\
+&{(-1)}^{n_{0}} s_{1}^{n_{1}} \cdots s_{k}^{n_{k}} = 1
+\end{align*}
+and since the group of multiplicative relations $\cL(-1, s_{1}, \ldots, s_{k})$ can be effectively computed. Whenever $\cL(-1, s_{1}, \ldots, s_{k})$ contains a non-zero vector, we use it to eliminate an unnecessary $\log(s_{i})$ term, although never eliminating $\log(-1)$. When this process is over, we can see whether each term $b_{i}/\pi$ is algebraic or transcendental: it is algebraic if $b_{i} = \alpha \log(-1), \alpha \in \Algebraics$, and transcendental otherwise.
+
+Now, when $\myvector{x} \in \Integers^{d}$, $A \myvector{x}$ is a vector with algebraic coefficients, so whenever $b_{i} / \pi$ is transcendental we may alter $\mathcal{P}$ by replacing $\leq$ by $<$ in the $i$-th inequality, preserving its intersection with $\Integers^{d}$.
+On the other hand, whenever $b_{i} / \pi$ is algebraic, we split our problem into two: in the first one, $\mathcal{P}$ is altered to force equality on the $i$-th constraint (that is, replacing $\leq$ by $=$), and in the second we force strict inequality (that is, replacing $\leq$ by $<$).
+We do this for all $i$, so that no $\leq$ is left in any problem instance, leaving us with finitely many polytopes, each defined by constraints of the form
+\begin{align*}
+K \myvector{x} &= \myvector{k} \quad &(\myvector{k} \in \Algebraics^{d_{1}}) \\
+M \myvector{x} &< \myvector{m} \quad &(\myvector{m} \in \Algebraics^{d_{2}}) \\
+F \myvector{x} &< \myvector{f} \quad &(\myvector{f} \in {\left(\Reals \setminus \Algebraics \right)}^{d_{3}})
+\end{align*}
+where $K,M,F$ are matrices with algebraic entries. Before proceeding, we eliminate all such empty polytopes; note that emptiness can be decided via Fourier-Motzkin elimination, as shown in \cref{thm:fme}.
+
+The idea of the next step is to reduce the dimension of all the problem instances at hand until we are left with a number of new instances with full-dimensional open convex polytopes, of the same form as the original one, apart from the fact that all inequalities in their definitions will be strict. To do that, we use the equations $K \myvector{x} = \myvector{k}$ to eliminate variables: note that, whenever there is an integer solution,
+\begin{align*}
+K \myvector{x} = \myvector{k}, \myvector{x} \in \Integers^{d} \Leftrightarrow \myvector{x} = \myvector{x}_{0} + M \myvector{z},
+\end{align*}
+where $M$ is a matrix with integer entries, $\myvector{x}_{0}$ is an integer vector and $\myvector{z}$ ranges over integer vectors over a smaller dimension space, wherein we also define the polytope
+\begin{align*}
+\mathcal{Q} = \lbrace \myvector{y} : \myvector{x}_{0} + M \myvector{y} \in \mathcal{P} \rbrace .
+\end{align*}
+
+Having now eliminated all equality constraints, we are left with a finite set of polytopes of the form $\mathcal{P} = \lbrace \myvector{x} \in \Reals^{d}: \pi A \myvector{x} < \myvector{b} \rbrace$ that are either empty or full-dimensional and open, and wish to decide whether they intersect the integer lattice of the corresponding space (different instances may lie in spaces of different dimensions, of course). Note that, when $\mathcal{P}$ is non-empty, we can use Fourier-Motzkin elimination to find a vector $\myvector{q} \in \Rationals^{d}$ in its interior, and $\varepsilon > 0$ such that the closed ball of centre $\myvector{q}$ and radius $\varepsilon$ with respect to the $l_{1}$ norm, which we call $\mathcal{B}$, is contained in $\mathcal{P}$.
+
+The next step is to consider the Minkowski-Weyl decomposition of $\mathcal{P}$, namely $\mathcal{P} = \mathcal{H} + \mathcal{C}$, where $\mathcal{H}$ is the convex hull of finitely many points of $\mathcal{P}$ (which we need not compute) and $\mathcal{C} = \lbrace \myvector{x} \in \Reals^{d}: A \myvector{x} \leq \myvector{0} \rbrace$ is a cone with an algebraic description.
+Note that $\mathcal{P}$ is bounded if and only if $\mathcal{C} = \lbrace \myvector{0} \rbrace$, in which case the problem at hand is simple: consider the polytope $\mathcal{Q}$ with an algebraic description obtained by rounding up each coordinate of $\myvector{b} / \pi$, which has the same conic part as $\mathcal{P}$ and which contains $\mathcal{P}$, and therefore is bounded; finally, compute a bound on $\mathcal{Q}$ (such a bound can be defined in the first-order theory of the reals), which is also a bound on $\mathcal{P}$, and test the integer points within that bound for membership in $\mathcal{P}$. Otherwise,
+\begin{align*}
+\mathcal{C} = \lbrace \alpha_{1} \myvector{c}_{1} + \cdots + \alpha_{k} \myvector{c}_{k}: \alpha_{1}, \ldots, \alpha_{k} \geq 0 \rbrace,
+\end{align*}
+where $\myvector{c}_{1}, \ldots, \myvector{c}_{k} \in \Algebraics^{d}$ are the extremal rays of $\mathcal{C}$. Note that $\myvector{q} + \mathcal{C} \subseteq \mathcal{P}$ and that $\mathcal{B} + \mathcal{C} \subseteq \mathcal{P}$.
+
+Now we consider a variation of an argument which appears in~\cite{KhachiyanP97}. Consider the computable set
+\begin{align*}
+\cL = \mathcal{C}^{\perp} \cap \Integers^{d} \, .
+\end{align*}
+
+If $\cL = \lbrace \myvector{0} \rbrace$ then due to~\cref{thm:kp-density} it must be the case that there exist non-negative reals $\lambda_{1}, \ldots, \lambda_{k}$ such that
+\begin{align*}
+\operatorname{dist} \left(\myvector{q} + \sum\limits_{i=1}^{k} \lambda_{i} \myvector{c}_{i}, \Integers^{d} \right) \leq \varepsilon ,
+\end{align*}
+and we know that $\mathcal{P} \cap \Integers^{d} \neq \emptyset$ from the fact that the closed ball $\mathcal{B}$ of centre $\myvector{q}$ and radius $\varepsilon$ with respect to the $l_{1}$ norm is contained in $\mathcal{P}$.
+
+On the other hand, if
+$\cL \neq \lbrace \myvector{0} \rbrace$, let
+$\myvector{z} \in \cL \setminus \lbrace \myvector{0}
+\rbrace$.
+Since $\mathcal{H}$ is a bounded subset of $\Reals^n$, the set
+\[ \lbrace \myvector{z}^T\myvector{x} : \myvector{x}\in \mathcal{P} \rbrace =
+   \lbrace \myvector{z}^T\myvector{x} : \myvector{x}\in \mathcal{H} \rbrace \]
+is a bounded subset of $\Reals$.
+Therefore there exist
+$a,b \in \Integers$ such that
+\begin{align*}
+\forall \myvector{x} \in \mathcal{P}, a \leq \myvector{z}^{T} \myvector{x} \leq b ,
+\end{align*}
+so we can reduce our problem to $b-a+1$ smaller-dimensional instances
+by finding the integer points of
+$\lbrace \myvector{x} \in \mathcal{P} :
+\myvector{z}^{T} \myvector{x} = i \rbrace$,
+for $i \in \lbrace a, \ldots, b \rbrace$. Note that we have seen
+earlier in the proof how to reduce the dimension of the ambient space
+when the polytope $\mathcal{P}$ is contained in an affine
+hyperplane.
+\end{proof}

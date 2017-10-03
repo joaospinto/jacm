@@ -1,0 +1,113 @@
+\subsection{Jordan Canonical Forms}
+\label{sec:jordan}
+
+Let $A \in \Rationals^{d \times d}$ be a square matrix with rational
+entries.
+The \emph{minimal polynomial} of $A$ is the unique monic
+polynomial $m(x) \in \Rationals[x]$ of least degree such that
+$m(A)=0$.  By the Cayley-Hamilton Theorem the degree of $m$ is at most
+the dimension of $A$. The set $\sigma(A)$ of eigenvalues is the set of
+zeros of $m$, also known as the \emph{spectrum} of $A$.
+The \emph{index} of an eigenvalue $\lambda$, denoted
+by $\nu(\lambda)$, is its multiplicity as a zero of $m$. We
+use $\nu(A)$ to denote $\max_{\lambda\in\sigma(A)} \nu(\lambda)$: the
+maximum index over all eigenvalues of $A$. An eigenvalue $\lambda$ is said to be \emph{simple} if $\nu(\lambda) = 1$ and \emph{repeated} otherwise.
+Given an eigenvalue $\lambda \in \sigma(A)$, we say that $\myvector{v} \in \Complex^{d}$ is a \emph{generalised eigenvector} of $A$ if $\myvector{v}\in \ker{(A-\lambda I)}^{k}$, for some $k\in\Naturals$.
+
+We denote the subspace of $\Complex^{d}$ spanned by the set of
+generalised eigenvectors associated with some eigenvalue $\lambda$ by
+$\mathcal{V}_{\lambda}$. We denote the subspace of $\Complex^{d}$
+spanned by the set of generalised eigenvectors associated with some
+real eigenvalue by $\mathcal{V}^{r}$.  We likewise denote the subspace
+of $\Complex^{d}$ spanned by the set of generalised eigenvectors
+associated to eigenvalues with non-zero imaginary part by
+$\mathcal{V}^{c}$.
+
+As a consequence of the existence of Jordan Canonical Forms, described later in this subsection, each vector $\myvector{v}\in\Complex^{d}$
+can be written uniquely as
+\begin{equation}
+\label{eq:eigen-decomposition}
+\myvector{v}=\displaystyle{
+  \sum\limits_{\lambda\in\sigma(A)}\myvector{v}_{\lambda}},
+\end{equation}
+where $\myvector{v}_{\lambda}\in\mathcal{V}_{\lambda}$.
+It follows that $\myvector{v}$ can also be uniquely written as
+$\myvector{v}=\myvector{v}^{r}+\myvector{v}^{c}$, where
+$\myvector{v}^{r} \in\mathcal{V}^{r}$ and
+$\myvector{v}^{c} \in\mathcal{V}^{c}$.
+
+We will need the following result:
+\begin{proposition}
+\label{conj-relation}
+Suppose that $\myvector{v}\in\mathbb{R}^{d}$ and that $\myvector{v}=\sum\limits_{\lambda\in\sigma(A)} \myvector{v}_{\lambda}$, where $\myvector{v}_{\lambda} \in\mathcal{V}_{\lambda}$. Then $\myvector{v}_{\overline{\lambda}}$ and $\myvector{v}_{\lambda}$ are component-wise complex conjugates.
+\end{proposition}
+
+\begin{proof}
+Since $A$ is real, $\myvector{v}_{\lambda}\in \ker{(A-\lambda I)}^{k}$
+  implies that
+  $\overline{\myvector{v}_{\lambda}} \in \ker{(A-\overline{\lambda}
+  I)}^{k}$
+  and hence that
+  $\overline{ \myvector{v}_{ \overline{\lambda}}} \in
+  \mathcal{V}_{\lambda}$.  The result follows from the fact that
+\begin{align*}
+\myvector{0}=\myvector{v}-\overline{\myvector{v}}=\sum\limits_{\lambda\in \sigma(A)}(\myvector{v}_{\lambda}-\overline{ \myvector{v}_{ \overline{\lambda}}})
+\end{align*}
+and from uniqueness of the decomposition~\eqref{eq:eigen-decomposition}.
+%
+%For each $\lambda\in\sigma(A)$, let $f_{\lambda}$ be the function mapping each $\myvector{v}$ to the corresponding $\myvector{v}_{\lambda}$. Fix a basis $\mathcal{B}$ of generalised eigenvectors of $A$, with the property
+%\begin{align*}
+%\myvector{x}\in\mathcal{B}\Rightarrow \overline{\myvector{x}}\in\mathcal{B}
+%\end{align*}
+%For each $\myvector{x}\in\mathcal{B}$, we define a linear functional $g_{\myvector{x}}$ so that
+%\begin{align*}
+%g_{\myvector{x}}(\sum\limits_{\myvector{y}\in\mathcal{B}} \alpha_{\myvector{y}}\myvector{y})=\alpha_{\myvector{x}}
+%\end{align*}
+%Then $\forall \myvector{u}\in\mathbb{C}^{d}, \overline{g_{\overline{\myvector{x}}}(\overline{\myvector{u}})}=g_{\myvector{x}}(\myvector{u})$, as this equality certainly holds when $\myvector{u}\in\mathcal{B}$, and by linearity of both sides. The result follows from the fact that
+%\begin{align*}
+%\forall \myvector{u}\in\mathbb{R}^{d}, f_{\lambda}(\myvector{u})= \sum\limits_{\myvector{x}\in\mathcal{B}:\myvector{x}\in\mathcal{V}_{\lambda}} g_{\myvector{x}}(\myvector{u})\myvector{x}
+%\end{align*}
+%
+\end{proof}
+
+We can write any matrix $A \in \Complex^{d \times d}$ as $A=Q^{-1}JQ$ for some
+invertible matrix $Q$ and block diagonal Jordan matrix
+$J=\diag{J_{1},\ldots,J_{N}}$, with each block $J_{i}$ having the
+following form:
+
+\begin{equation*}
+\begin{pmatrix}
+\lambda	&&	1		&&	0		&&	\cdots	&&	0		\\
+0		&&	\lambda	&&	1		&&	\cdots	&&	0		\\
+\vdots	&&	\vdots	&&	\vdots	&&	\ddots	&&	\vdots	\\
+0		&&	0		&&	0		&&	\cdots	&&	1		\\
+0		&&	0		&&	0		&&	\cdots	&&	\lambda	\\
+\end{pmatrix}
+\end{equation*}
+Moreover, given a rational matrix $A$, its Jordan Normal Form $A=Q^{-1}JQ$ can be
+computed in polynomial time, as shown in~\cite{Cai94}.
+
+Note that each vector $\myvector{v}$ appearing as a column of the
+matrix $Q^{-1}$ is a generalised eigenvector, and that the
+index $\nu(\lambda)$ of some eigenvalue $\lambda$ corresponds to the
+dimension of the largest Jordan block associated with it.
+
+One can obtain a closed-form expression for powers of block diagonal
+Jordan matrices, and use this to get a closed-form expression for
+the powers of any matrix $A$. In fact, if $J_{i}$ is a
+$k\times k$ Jordan block associated with some eigenvalue $\lambda$,
+then
+%\noindent
+\begin{equation}
+\label{eq:jordan_powers}
+J_{i}^{n}=\begin{pmatrix}
+\lambda^{n}	&&	n\lambda^{n-1}	&&	{n\choose 2}\lambda^{n-1}	&&
+\cdots		&&	{n\choose k-1}\lambda^{n-k+1}				\\
+0			&&	\lambda^{n}		&&	n\lambda^{n-1}				&&
+\cdots		&&	{n\choose k-2}\lambda^{n-k+2}				\\
+\vdots	&&	\vdots	&&	\vdots	&&	\ddots	&&	\vdots			\\
+0		&&	0		&&	0		&&	\cdots	&&	n\lambda^{n-1}	\\
+0		&&	0		&&	0		&&	\cdots	&&	\lambda^{n}		\\
+\end{pmatrix}
+\end{equation}
+where ${n\choose j}$ is defined to be $0$ when $n<j$.

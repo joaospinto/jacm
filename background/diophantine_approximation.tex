@@ -1,0 +1,42 @@
+\subsection{Diophantine Approximation}
+
+The following result, due to Leopold Kronecker, on simultaneous Diophantine approximation, generalises Dirichlet's Approximation Theorem. We denote the \emph{group of additive relations} of $\myvector{v} \in \Complex^{d}$ by
+\begin{align*}
+\cA(\myvector{v}) = \lbrace \myvector{z} \in \Integers^{d} : \myvector{z} \cdot \myvector{v} \in \Integers \rbrace .
+\end{align*}
+
+Throughout this thesis, $\dist$ refers to the $l_{1}$ distance.
+
+\begin{theorem}[Kronecker]
+\label{thm:Kronecker}
+Let $\myvector{\alpha}_{1}, \ldots, \myvector{\alpha_{k}} \in \Reals^{d}$ and $\myvector{\beta} \in \Reals^{d}$. The following are equivalent:
+\begin{enumerate}
+\item For any $\varepsilon > 0$, there exists $\myvector{n} \in \Naturals^{k}$ such that
+\begin{align*}
+\operatorname{dist}(\myvector{\beta} + \sum\limits_{i=1}^{k} n_{i} \myvector{\alpha}_{i}, \Integers^{d}) \leq \varepsilon .
+\end{align*}
+\item The following relation holds:
+\begin{align*}
+\bigcap\limits_{i=1}^{k} \cA(\myvector{\alpha}_{i}) \subseteq \cA(\myvector{\beta}) .
+\end{align*}
+\end{enumerate}
+\end{theorem}
+
+A proof of this result can be found in~\cite{Cassels}.
+Note that the second condition essentially states that all the integer relations that are satisfied by all the $\myvector{\alpha}_{i}$ are also satisfied by $\myvector{\beta}$.
+
+We will also need the following result, which is a weak form of~\cite[Corollary 2.8]{KhachiyanP97}.
+
+\begin{theorem}
+\label{thm:kp-density}
+Suppose that $\mathcal{C} = \lbrace \myvector{c}_{1}, \ldots, \myvector{c}_{k} \rbrace \subseteq \Reals^{d}$ and that $\mathcal{C}^{\perp} \cap \Integers^{d} = \lbrace \myvector{0} \rbrace$. Then for any $\myvector{q} \in \Reals^{d}$
+and for any $\varepsilon > 0$ there exist non-negative reals $\lambda_{1}, \ldots, \lambda_{k}$ such that
+\begin{equation*}
+  \dist(\myvector{q} + \sum\limits_{i=1}^{k} \lambda_{i} \myvector{c}_{i}, \Integers^{d}) \leq \varepsilon \, .
+\end{equation*}
+\end{theorem}
+In order to compare \cref{thm:kp-density} to \cref{thm:Kronecker}, note that
+\begin{equation*}
+  \bigcap\limits_{i=1}^{k} \cA(\myvector{c}_{i}) = \lbrace \myvector{0} \rbrace
+  \Rightarrow {\lbrace \myvector{c}_{1}, \ldots, \myvector{c}_{k} \rbrace}^{\perp} \cap \Integers^{d} = \lbrace \myvector{0} \rbrace \, .
+\end{equation*}

@@ -1,0 +1,370 @@
+\section{Undecidability of the Non-Commutative Case}
+\label{sec:lics_encoding}
+
+In this section we show that the Matrix-Exponential Problem is
+undecidable in the case of non-commuting matrices.  We show
+undecidability for the most fundamental variant of the problem, as
+given in \cref{def:MEP}, in which the matrices have real
+entries and the variables $t_{i}$ range over the non-negative reals.
+Recall that this problem is decidable in the commutative case by the
+results of the previous section.
+
+\subsection{Matrix-Exponential Problem with Constraints}
+
+The proof of undecidability in the non-commutative case is by
+reduction from Hilbert's Tenth Problem.  The reduction proceeds via
+several intermediate problems.  These problems are obtained by
+augmenting MEP with various classes of arithmetic constraints on the
+real variables that appear in the statement of the problem.
+
+\begin{definition}
+  We consider the following three classes of arithmetic constraints
+  over real variables $t_1,t_2,\ldots$:
+\begin{itemize}
+\item $\mathcal{E}_{\pi\Integers}$ comprises constraints of the form
+  $t_{i}\in\alpha+\beta\pi\Integers$, where $\alpha$ and $\beta\neq 0$
+  are real-valued constants such that $\cos(2\alpha\beta^{-1})$,
+  $\beta$ are both algebraic numbers.
+\item $\mathcal{E}_{+}$ comprises linear equations of the form
+  $\alpha_1 t_1 + \cdots + \alpha_n t_n = \alpha_0 $, for
+  $\alpha_0,\ldots,\alpha_n$ real algebraic constants.
+\item $\mathcal{E}_{\times}$ comprises equations of the form
+  $t_{\ell} = t_{i} t_{j}$.
+\end{itemize}
+\end{definition}
+
+A class of constraints $\mathcal{E} \subseteq \mathcal{E}_{\pi\Integers} \cup
+\mathcal{E}_{+}\cup \mathcal{E}_{\times}$
+induces a generalisation of the MEP problem as follows:
+\begin{definition}[MEP with Constraints]
+  Given a class of constraints
+  $\mathcal{E} \subseteq \mathcal{E}_{\pi\Integers} \cup
+  \mathcal{E}_{+}\cup \mathcal{E}_{\times}$,
+  the problem MEP$(\mathcal{E})$ is as follows.  An instance consists
+  of real algebraic matrices $A_1,\ldots,A_k,C$ and a finite set of
+  constraints $E\subseteq\mathcal{E}$ on real variables
+  $t_1,\ldots,t_k$.  The question is whether there exist non-negative
+  real values for $t_1,\ldots,t_k$ such that
+  $\prod_{i=1}^{k} e^{A_{i} t_{i}}=C$ and the constraints $E$ are all
+  satisfied.
+\label{def:contraintMEP}
+\end{definition}
+
+Note that in the above definition of MEP$(\mathcal{E})$ the set of
+constraints $E$ only mentions real variables $t_1,\ldots,t_k$
+appearing in the matrix equation $\prod_{i=1}^{k} e^{A_{i} t_{i}}=C$.
+However, without loss of generality, we can allow constraints to
+mention fresh variables $t_{i}$, for $i>k$, since we can always define a
+corresponding matrix $A_i=0$ for such variables for then
+$e^{A_{i} t_{i}}=I$ has no effect on the matrix product.  In other words,
+we can without loss of generality have constraints in $\mathcal{E}$ with existentially
+quantified variables.  In particular, we have the following
+useful observations:
+
+\begin{itemize}
+\item[\textbullet] We can express inequality constraints of the form
+  $t_{i}\neq \alpha$ in  $\mathcal{E}_{+}\cup \mathcal{E}_{\times}$ by
+using fresh variables
+  $t_{j},t_{\ell}$.  Indeed $t_{i} \neq \alpha$ is satisfied whenever there
+  exist values of $t_{j}$ and $t_{\ell}$ such that $t_{i}=t_{j}+\alpha$ and
+  $t_{j} t_{\ell}=1$.
+
+\item[\textbullet] By using fresh variables,
+  $\mathcal{E}_{+}\cup \mathcal{E}_{\times}$ can express polynomial
+  constraints of the form $P(t_1,\ldots,t_n)=t$ for $P$ a polynomial
+  with integer coefficients.
+\end{itemize}
+
+We illustrate the above two observations in an example.
+\begin{example}
+  Consider the problem, given matrices $A_1,A_2$ and $C$, to decide
+  whether there exist $t_1,t_2 \geq 0$ such that
+  \[ e^{A_1t_1}e^{A_2t_2}=C \,\mbox{ and }\, t_1^2-1=t_2, t_2\neq 0 \, .\]
+  This is equivalent to the following instance of
+  MEP$(\mathcal{E}_{+}\cup\mathcal{E}_{\times})$: decide whether there exist $t_1,\ldots,t_5\geq 0$ such that
+\[ \prod_{i=1}^5 e^{A_{i} t_{i}}=C \,\mbox{ and }\, t_1t_1=t_3, t_3-1=t_2, t_2t_4=t_5, t_5=1\]
+where $A_1,A_2$ and $C$ are as above and $A_3=A_4=A_5=0$.
+% where
+% \begin{equation*}
+% A_1=\begin{bmatrix}1&2\\0&1\end{bmatrix}, A_2=\begin{bmatrix}0&3\\2&1\end{bmatrix},
+% A_3=\begin{bmatrix}-1&\sqrt{2}\\7&\tfrac{3}{42}\end{bmatrix},C=\begin{bmatrix}4&3\\2&1\end{bmatrix}.
+% \end{equation*}
+\end{example}
+
+
+% The following observations will prove useful in the following:
+% \begin{itemize}
+% \item[\textbullet] Since $\mathcal{E}_{+}$ contains equations of the
+%   form $t_{i}=t_{j}$ and $t_{i}=\alpha$ and so we can use constraints to fix
+%   the value of a variable to be a real algebraic constant and we can
+%   ensure that several variables have the same value.
+
+% \end{itemize}
+
+We will make heavy use of the following proposition to combine several
+instances of the constrained MEP into a single instance by combining
+matrices block-wise.
+\begin{proposition}\label{prop:remark}
+  Given real algebraic matrices $A_1,\ldots,A_k,C$ and
+  $A_1',\ldots,A_k',C'$, there exist real algebraic matrices
+  $A_1'',\ldots,A_k''$, $C''$ such that for all $t_1,\ldots,t_k$:
+  \[\prod_{i=1}^{k} e^{A_{i}''t_{i}}=C''\qquad\Leftrightarrow\qquad\left(\prod_{i=1}^{k} e^{A_{i} t_{i}}=C\right)\wedge\left(\prod_{i=1}^{k} e^{A_i't_{i}}=C'\right).\]
+\label{prop:combine}
+\end{proposition}
+
+\begin{proof}
+For any $i\in \lbrace 1,\ldots,k \rbrace$, define
+\[A_i''=\begin{bmatrix}A_i&0\\0&A_i'\end{bmatrix},\qquad
+C''=\begin{bmatrix}C&0\\0&C'\end{bmatrix}.\]
+The result follows because the matrix exponential can be computed
+block-wise (as is clear from its power series definition):
+\[\prod_{i=1}^{k} e^{A_i''t_{i}}=\prod_{i=1}^{k}\begin{bmatrix}e^{A_{i} t_{i}}&0\\0&e^{A_i't_{i}}\end{bmatrix}=
+\begin{bmatrix}\prod_{i=1}^{k} e^{A_{i} t_{i}}&0\\0&\prod_{i=1}^{k} e^{A_i't_{i}}\end{bmatrix}.\]
+\end{proof}
+
+We remark that in the statement of \cref{prop:remark} the
+two matrix equations that are combined are over the same set of
+variables.  However, we can clearly combine any two matrix equations
+for which the common variables appear in the same order in the
+respective products.
+
+The core of the reduction is to show that the constraints in
+$\mathcal{E}_{\pi\Integers},\mathcal{E}_{+}$ and
+$\mathcal{E}_{\times}$ do not make the MEP problem harder: one can
+always encode them using the matrix product equation.
+
+\begin{proposition}
+  MEP$(\mathcal{E}_{\pi\Integers} \cup \mathcal{E}_{+} \cup
+  \mathcal{E}_{\times})$ reduces to MEP$(\mathcal{E}_{+} \cup
+  \mathcal{E}_{\times})$.
+\label{lem:pi}
+\end{proposition}
+\begin{proof}
+  Let $A_1,\ldots,A_k,C$ be real algebraic matrices and
+  $E\subseteq \mathcal{E}_{\pi\Integers} \cup \mathcal{E}_{+} \cup
+  \mathcal{E}_{\times}$
+  a finite set of constraints on real variables $t_1,\ldots,t_k$.  Since $E$ is
+  finite it suffices to show how to eliminate a single constraint
+  in $\mathcal{E}_{\pi \Integers} \cap E$ from $E$.
+
+  Let $t_{j}\in\alpha+\beta\pi\Integers$ be a constraint in $E$.  By definition
+of  $\mathcal{E}_{\pi\Integers}$
+we have
+  that $\cos(2\alpha\beta^{-1}),\sin(2\alpha\beta^{-1})$ and
+  $\beta\neq0$ are real algebraic.  Now define the following extra
+  matrices:
+\[A'_j=\begin{bmatrix}0&2\beta^{-1}\\-2\beta^{-1}&0\end{bmatrix},
+ C'=\begin{bmatrix}\cos(2\alpha\beta^{-1})&
+\sin(2\alpha\beta^{-1})\\-\sin(2\alpha\beta^{-1})&\cos(2\alpha\beta^{-1})\end{bmatrix}.\]
+Our assumptions ensure that $A_j'$ and $C'$ are both real algebraic.
+
+We now have the following chain of equivalences:
+\begin{align*}
+e^{A'_j t_{j}}=C'
+&\Leftrightarrow\begin{bmatrix}\cos(2t_{j}\beta^{-1})&
+\sin(2t_{j}\beta^{-1})\\-\sin(2t_{j}\beta^{-1})&\cos(2t_{j}\beta^{-1})\end{bmatrix}
+=C'\\
+&\Leftrightarrow\cos(2t_{j}\beta^{-1})=\cos(2\alpha\beta^{-1}) \\
+&\qquad\wedge\sin(2t_{j}\beta^{-1})=\sin(2\alpha\beta^{-1}) \\
+&\Leftrightarrow2\beta^{-1}t_{j}\equiv 2\alpha\beta^{-1}\mod 2\pi \\
+&\Leftrightarrow t_{j}\in\alpha+\beta\pi\Integers.
+\end{align*}
+Thus the additional matrix equation $e^{A_j't_{j}}=C'$ is equivalent to
+the constraint $t_{j}\in\alpha+\beta\pi\Integers$.  Applying
+\cref{prop:combine} we can thus eliminate this constraint.
+\end{proof}
+
+\begin{proposition}
+  MEP$(\mathcal{E}_{+}\cup\mathcal{E}_{\times})$ reduces to
+  MEP$(\mathcal{E}_{+})$.
+\label{lem:times}
+\end{proposition}
+
+\begin{proof}
+  Let $A_1,\ldots,A_k,C$ be real algebraic matrices and
+  $E \subseteq\mathcal{E}_{+}\cup\mathcal{E}_{\times}$ a finite set of
+  constraints on variables $t_1,\ldots,t_k$.  We proceed as above,
+  showing how to remove each constraint in
+  $\mathcal{E}_{\times}$ from $E$.  In so doing we potentially increase the
+  number of matrices and add new constraints from $\mathcal{E}_{+}$.
+
+  Let $t_l=t_{i} t_{j}$ be an equation in $E$.  To eliminate this equation
+the first step is to introduce fresh
+variables $x,x',y,y',z$ and add the constraints
+\[ t_{i}=x,\, t_{j}=y,\, t_{\ell} = z,\]
+which are all in $\mathcal{E}_{+}$.  We now add a new matrix equation
+over the fresh variables $x,x',y,y',z$ that is equivalent to the
+constraint $xy=z$.  Since this matrix equation involves a new set of
+variables we are free to the set the order of the matrix products,
+which is crucial to express the desired constraint.
+
+The key gadget is the following matrix product equation,
+  which holds for  any $x,x',y,y',z\geqslant0$:
+\begin{equation*}
+\begin{bmatrix}1&0&-z\\0&1&0\\0&0&1\end{bmatrix}
+\begin{bmatrix}1&0&0\\0&1&-y'\\0&0&1\end{bmatrix}
+\begin{bmatrix}1&x&0\\0&1&0\\0&0&1\end{bmatrix}
+\begin{bmatrix}1&0&0\\0&1&y\\0&0&1\end{bmatrix}
+\begin{bmatrix}1&-x'&0\\0&1&0\\0&0&1\end{bmatrix}=
+\begin{bmatrix}1&x-x'&z-xy\\0&1&y-y'\\0&0&1\end{bmatrix}.
+\end{equation*}
+
+Notice that each of the matrices on the left-hand side of the above
+equation has a single non-zero off-diagonal entry.  Crucially each
+matrix of this form can be expressed as an exponential.  Indeed we can
+write the above equation as a matrix-exponential product
+\[ e^{B_1z} e^{B_2y'} e^{B_3x} e^{B_4y} e^{B_5x'} = \begin{bmatrix}1&x-x'&z-xy\\0&1&y-y'\\0&0&1\end{bmatrix} \]
+for matrices
+%\[\begin{array}{r@{}cp{.1cm}r@{}cp{.1cm}r@{}c}
+%B_1=&\begin{bmatrix}0&0&-1\\0&0&0\\0&0&0\end{bmatrix} &&
+%B_3=&\begin{bmatrix}0&1&0\\0&0&0\\0&0&0\end{bmatrix} &&
+%B_5=&\begin{bmatrix}0&-1&0\\0&0&0\\0&0&0\end{bmatrix} \\[10pt]
+%B_2=&\begin{bmatrix}0&0&0\\0&0&-1\\0&0&0\end{bmatrix} &&
+%B_4=&\begin{bmatrix}0&0&0\\0&0&1\\0&0&0\end{bmatrix} \\
+%\end{array}\]
+\begin{align*}
+&B_1=\begin{bmatrix}0&0&-1\\0&0&0\\0&0&0\end{bmatrix} &&
+&B_3=\begin{bmatrix}0&1&0\\0&0&0\\0&0&0\end{bmatrix} &&
+B_5=\begin{bmatrix}0&-1&0\\0&0&0\\0&0&0\end{bmatrix} \\[10pt]
+&B_2=\begin{bmatrix}0&0&0\\0&0&-1\\0&0&0\end{bmatrix} &&
+&B_4=\begin{bmatrix}0&0&0\\0&0&1\\0&0&0\end{bmatrix} \\
+\end{align*}
+Thus the constraint $xy=z$ can be expressed as
+\begin{gather}
+e^{B_1z} e^{B_2y'} e^{B_3x} e^{B_4y} e^{B_5x'} = I \, .
+\label{eq:fresh}
+\end{gather}
+
+Again, we can apply \cref{prop:combine} to combine the
+equation (\ref{eq:fresh}) with the matrix equation from the original
+problem instance and thus encode the constraint $z=xy$.
+
+% as the example below illustrates:
+% \[\exp\left(\begin{bmatrix}0&1&0\\0&0&0\\0&0&0\end{bmatrix}x\right)=\begin{bmatrix}1&x&0\\0&1&0\\0&0&1\end{bmatrix}.\]
+% Also note that we arranged so that all cancelations happen with nonnegative variables (thus the $x-x'$ instead
+% of $x+x'$ for example). Since the order in which the matrices are multiplied is crucial,
+% we create new variables $t_{k+1},\ldots,t_{k+4}$ and the following matrices:
+% \[\begin{array}{r@{}cp{.1cm}r@{}c}
+% A_{l}'=&\begin{bmatrix}0&0&-1\\0&0&0\\0&0&0\end{bmatrix},&&
+% A_{k+1}'=&\begin{bmatrix}0&0&0\\0&0&-1\\0&0&0\end{bmatrix},\\
+% A_{k+2}'=&\begin{bmatrix}0&1&0\\0&0&0\\0&0&0\end{bmatrix},&&
+% A_{k+3}'=&\begin{bmatrix}0&0&0\\0&0&1\\0&0&0\end{bmatrix},\\
+% A_{k+4}'=&\begin{bmatrix}0&-1&0\\0&0&0\\0&0&0\end{bmatrix},&&
+% C'=&\begin{bmatrix}1&0&0\\0&1&0\\0&0&1\end{bmatrix}.
+%   \end{array}\]
+%   We also add the following equations to the problem, to relate the new variables to the
+%   ones of the equation:
+% \begin{equation}\label{eq:mult:eq}
+% t_{k+2}=t_{j},\quad t_{k+2}=t_{i},\quad t_{k+3}=t_{j}, \quad t_{k+4}=t_{i}.
+% \end{equation}
+% It now follows that the following extra product equation becomes:
+% \begin{align*}
+% &e^{A_l't_l}\prod_{i=1}^{4}e^{A'_{k+i}t_{k+i}}=C'\wedge\eqref{eq:mult:eq}\\
+% &\qquad\Leftrightarrow\begin{bmatrix}1&0&t_l-t_{i}t_{j}\\0&1&0\\0&0&1\end{bmatrix}=
+% \begin{bmatrix}1&0&0\\0&1&0\\0&0&1\end{bmatrix}\wedge\eqref{eq:mult:eq}\\
+% &\qquad\Leftrightarrow t_l=t_{i}t_{j}\wedge\eqref{eq:mult:eq}.
+% \end{align*}
+
+% Since variables $t_{k+1},\ldots,t_{k+4}$ were not part of the original
+% instance, the reduced problem is equivalent to the original
+% one. Indeed, if the reduced problem is satisfiable then the equation
+% above shows that the original one is satisfiable. Conversely, if the
+% original instance is satisfiable, we can always find an assignement of
+% the extra variables to satisfy \eqref{eq:mult:eq} and make the reduced
+% problem satisfiable.
+\end{proof}
+
+\begin{proposition}
+  MEP$(\mathcal{E}_{+})$ reduces to MEP\@.
+\label{lem:plus}
+\end{proposition}
+
+\begin{proof}
+  Let $A_1,\ldots,A_k,C$ be real algebraic matrices and
+  $E \subseteq\mathcal{E}_{+}$ a set of constraints.
+  We proceed as above, showing how to eliminate each constraint from
+  $E$ that lies in $\mathcal{E}_{+}$, while preserving the set of
+  solutions of the instance.
+
+Let $\beta+\sum_{i=1}^{k} \alpha_{i} t_{i}=0$ be an equation in $E$.
+Recall that $\beta,\alpha_1,\ldots,\alpha_k$ are real algebraic.
+Define the extra matrices $A_1',\ldots,A_k'$ and $C'$ as follows:
+\[A_i'=
+\begin{bmatrix}
+  0&\alpha_{i} \\
+  0&0
+\end{bmatrix},
+\qquad C'=\begin{bmatrix}
+1&-\beta \\
+0&1\end{bmatrix}.
+\]
+Our assumptions ensure that $A_1',\ldots,A_k'$ and $C'$ are all real algebraic.
+Furthermore, the following extra product equation becomes:
+\begin{align*}
+\prod_{i=1}^{k} e^{A_i't_{i}}=C &\Leftrightarrow
+\prod_{i=1}^{k}\begin{bmatrix}
+1&\alpha_{i} t_{i} \\
+0&1
+\end{bmatrix}=\begin{bmatrix}
+1&-\beta \\
+0&1
+\end{bmatrix}\\
+&\Leftrightarrow\sum_{i=1}^{k}\alpha_{i} t_{i}=-\beta \, .
+\end{align*}
+\end{proof}
+
+Combining~\cref{lem:pi}, \cref{lem:times}, and \cref{lem:plus} we
+have:
+\begin{proposition}
+  MEP$(\mathcal{E}_{\pi\Integers}\cup\mathcal{E}_{+}\cup\mathcal{E}_{\times})$
+  reduces to MEP\@.
+\end{proposition}
+
+\subsection{Reduction from Hilbert's Tenth Problem}
+
+\begin{theorem}
+  MEP is undecidable in the non-commutative case.
+\end{theorem}
+
+\begin{proof}
+  We have seen in the previous section that the problem
+  MEP$(\mathcal{E}_{\pi\Integers}\cup\mathcal{E}_{+}\cup\mathcal{E}_{\times})$
+  reduces to MEP without constraints.  Thus it suffices to reduce
+  Hilbert's Tenth Problem to
+  MEP$(\mathcal{E}_{\pi\Integers}\cup\mathcal{E}_{+}\cup\mathcal{E}_{\times})$.
+  In fact the matrix equation will not play a role in the
+  target of this reduction, only the additional constraints!
+
+  Let $P$ be a polynomial of total degree $d$ in $k$ variables with
+  integer coefficients. From $P$ we build a homogeneous polynomial $Q$, by
+  adding a new variable $\lambda$:
+  \[Q(\mathbf{x},\lambda)=\lambda^{d}P\left(\frac{x_1}{\lambda},\ldots,
+    \frac{x_k}{\lambda}\right).\]
+  Note that $Q$ still has integer coefficients. Furthermore, we have the relationship
+\[Q(\mathbf{x},1)=P(\mathbf{x}).\]
+
+As we have seen previously, it is easy to encode $Q$ with constraints,
+in the sense that we can compute a finite set of constraints
+$E_Q \subseteq \mathcal{E}_{+}\cup\mathcal{E}_{\times}$ mentioning variables
+$t_0,\ldots,t_m,\lambda$
+such that $E$ is
+satisfied if and only if $t_0=Q(t_1,\ldots,t_k,\lambda)$. Note that
+$E_Q$ may need to mention variables other
+than $t_1,\ldots,t_k$ to do that.  Another
+finite set of equations
+$E_{\pi\Integers}\subseteq\mathcal{E}_{\pi\Integers}$ is used to
+encode that $t_1,\ldots,t_k,\lambda\in\pi\Integers$. Finally,
+$E_{=}\subseteq\mathcal{E}_{+}\cup\mathcal{E}_{\times}$ is used to
+encode $t_{0}=0$ and $1\leqslant \lambda\leqslant4$.  The
+latter is done by adding the polynomial equations $\lambda=1+\alpha^2$ and
+$\lambda=4-\beta^2$ for some $\alpha$ and $\beta$. Finally we have the
+following chain of equivalences:
+\begin{align*}
+&\exists t_0,\ldots,\lambda\geqslant0\text{ s.t. }E_Q\cup E_{\pi\Integers}\cup E_{=}\text{ is satisfied }\\
+&\qquad\Leftrightarrow\exists t_1,\ldots,\lambda\geqslant0\text{ s.t. } 0=Q(t_1,\ldots,t_k,\lambda)\\
+    &\qquad\qquad\wedge t_1,\ldots,t_k,\lambda\in\pi\Integers\wedge 1\leqslant\lambda\leqslant4\\
+&\qquad\Leftrightarrow\exists n_1,\ldots,n_k\in\Naturals\text{ s.t. } 0=Q(\pi n_1,\ldots,\pi n_k,\pi)\\
+&\qquad\Leftrightarrow\exists n_1,\ldots,n_k\in\Naturals\text{ s.t. } 0=\pi^{d} Q(n_1,\ldots,n_k,1)\\
+&\qquad\Leftrightarrow\exists n_1,\ldots,n_k\in\Naturals\text{ s.t. } 0=P(n_1,\ldots,n_k).\\
+\end{align*}
+\end{proof}

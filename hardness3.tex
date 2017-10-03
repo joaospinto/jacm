@@ -1,0 +1,76 @@
+\section{Generalised Continuous Orbit and Skolem Problems}
+
+We start by recalling the definition of the Generalised Continuous Orbit and Skolem Problems.
+
+\generalisedproblems*
+
+We will now prove that these are both undecidable.
+
+\begin{theorem}
+The Generalised Continuous Orbit Problem is undecidable.
+\end{theorem}
+
+\begin{proof}
+This can be shown by reduction from MESP. In particular, given square matrices $B_{1}, \ldots, B_{k}, C$, we construct matrices $A_{1}, \ldots, A_{k}$ and vectors $\myvector{x}, \myvector{y}$ for which
+\begin{equation}
+  \label{eq:mesp-to-orbit}
+\prod \limits_{i=1}^{k} \exp(B_{i} t_{i}) = C \Leftrightarrow
+\prod \limits_{i=1}^{k} \exp(A_{i} t_{i}) \myvector{x} = \myvector{y} .
+\end{equation}
+
+Let $\myvector{c}_{1}, \ldots, \myvector{c}_{n}$ be the columns of $C$, from left to right, and let $\myvector{e}_{1}, \ldots, \myvector{e}_{n}$ denote the canonical basis of $\Reals^{n}$. Then~\eqref{eq:mesp-to-orbit} can be achieved by setting, for each $i \in \lbrace 1, \ldots, n \rbrace$,
+\begin{equation*}
+A_{i} =
+\begin{pmatrix}
+B_{i} && \cdots && 0 \\
+\vdots && \ddots && \vdots \\
+0 && \cdots && B_{i}
+\end{pmatrix},
+\end{equation*}
+as well as
+\begin{equation*}
+\myvector{x} = \begin{pmatrix} \myvector{e}_{1} \\ \vdots \\ \myvector{e}_{n} \end{pmatrix} \mbox{ and }
+\myvector{y} = \begin{pmatrix} \myvector{c}_{1} \\ \vdots \\ \myvector{c}_{n} \end{pmatrix} \, .
+\end{equation*}
+\end{proof}
+
+Finally, we show the last result of the present chapter.
+
+\begin{theorem}
+The Generalised Continuous Skolem Problem is undecidable.
+\end{theorem}
+
+\begin{proof}
+This can be shown by reduction from the Generalised Continuous Orbit Problem.
+Similarly to what we did in the previous proof, we will define matrices $C_{1}, \ldots, C_{k}$ and vectors $\myvector{w}, \myvector{z}$ such that
+\begin{equation*}
+\prod \limits_{i=1}^{k} \exp(A_{i} t_{i}) \myvector{x} = \myvector{y}
+\Leftrightarrow
+\myvector{w}^{T} \prod\limits_{i=1}^{k} \exp(C_{i} t_{i}) \myvector{z} = 0 \, .
+\end{equation*}
+
+Let $\myvector{e}_{1}, \ldots, \myvector{e}_{n}$ denote the canonical basis of $\Reals^{n}$. Moreover, let
+\begin{equation*}
+B_{i} = \begin{pmatrix} A_{i} && 0 \\ 0 && 0 \end{pmatrix},
+\myvector{u}_{j} = \begin{pmatrix} \myvector{e}_{j} \\ - \myvector{e}_{j} \end{pmatrix},
+\myvector{v} = \begin{pmatrix} \myvector{x} \\ \myvector{y} \end{pmatrix}
+\end{equation*}
+and
+\begin{equation*}
+C_{i} = \begin{pmatrix} B_{i} \otimes I + I \otimes B_{i} && \cdots && 0 \\ \vdots && \ddots && \vdots \\ 0 && \cdots && B_{i} \otimes I + I \otimes B_{i} \end{pmatrix} \, .
+\end{equation*}
+Then
+\begin{align*}
+&\prod \limits_{i=1}^{k} \exp(A_{i} t_{i}) \myvector{x} = \myvector{y} \\
+\Leftrightarrow &\sum \limits_{j=1}^{n} \left( \myvector{u}_{j}^{T} \prod \limits_{i=1}^{k} \exp(B_{i} t_{i}) \myvector{v} \right)^{2} = 0 \\
+\Leftrightarrow &\sum \limits_{j=1}^{n} \left( \left( \myvector{u}_{j} \otimes \myvector{u}_{j} \right)^{T} \prod \limits_{i=1}^{k} \left( \exp( B_{i} t_{i} ) \otimes \exp(B_{i} t_{i}) \right) \left( \myvector{v} \otimes \myvector{v} \right) \right) = 0 \\
+\Leftrightarrow &\sum \limits_{j=1}^{n} \left( \left( \myvector{u}_{j} \otimes \myvector{u}_{j} \right)^{T} \prod \limits_{i=1}^{k} \exp\left((B_{i} \otimes I + I \otimes B_{i}) t_{i} \right) \left( \myvector{v} \otimes \myvector{v} \right) \right) = 0 \\
+\Leftrightarrow &\begin{pmatrix} \left(\myvector{u}_{1} \otimes \myvector{u}_{1}\right)^{T} \\ \vdots \\ \left(\myvector{u}_{n} \otimes \myvector{u}_{n}\right)^{T} \end{pmatrix}^{T} \prod \limits_{i=1}^{k} \exp( C_{i} t_{i} ) \begin{pmatrix} \myvector{v} \otimes \myvector{v} \\ \vdots \\ \myvector{v} \otimes \myvector{v} \end{pmatrix} = 0 .
+\end{align*}
+
+The result then follows by taking
+\begin{equation*}
+  \myvector{w} = \begin{pmatrix} \left(\myvector{u}_{1} \otimes \myvector{u}_{1}\right)^{T} \\ \vdots \\ \left(\myvector{u}_{n} \otimes \myvector{u}_{n}\right)^{T} \end{pmatrix}
+  \mbox{ and } \myvector{z} = \begin{pmatrix} \myvector{v} \otimes \myvector{v} \\ \vdots \\ \myvector{v} \otimes \myvector{v} \end{pmatrix} \, .
+\end{equation*}
+\end{proof}

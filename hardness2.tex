@@ -1,0 +1,221 @@
+\subsection{Enforcing a matrix product order}
+\label{sec:lics_gadget}
+
+In this section, we will present a gadget matrix-exponential semigroup that can
+enforce a certain partial order on the matrices reaching a particular target.
+This will be useful to establish the reduction MEP $\leq$ MESP\@.
+More precisely, we will exhibit five matrices $W,X,Y,Z$ and $G$ such that any
+product $G=\prod_{i=1}^{p} e^{A_{i} t_{i}}$
+where $t_{i}>0$ and $A_{i}\in \lbrace W,X,Y,Z \rbrace$ is such that all the ``$X$'' appear before
+the ``$Y$''. Define the following matrices:
+
+%\[
+%\begin{array}{r@{}c@{}cr@{}c@{}cr@{}c}
+%W=&\begin{bmatrix}0&0&0\\0&1&0\\0&0&2\end{bmatrix},&&
+%X=&\begin{bmatrix}0&0&0\\0&0&1\\0&0&0\end{bmatrix},&&
+%Z=&\begin{bmatrix}0&0&0\\0&-1&0\\0&0&-2\end{bmatrix},\\
+%Y=&\begin{bmatrix}0&1&0\\0&0&0\\0&0&0\end{bmatrix},&&
+%G=&\begin{bmatrix}1&1&0\\0&1&1\\0&0&1\end{bmatrix}.&&&
+%\end{array}
+%\]
+\begin{align*}
+W&=\begin{bmatrix}0&0&0\\0&1&0\\0&0&2\end{bmatrix},&&
+&X=\begin{bmatrix}0&0&0\\0&0&1\\0&0&0\end{bmatrix},&&
+Z=\begin{bmatrix}0&0&0\\0&-1&0\\0&0&-2\end{bmatrix},\\[5pt]
+Y&=\begin{bmatrix}0&1&0\\0&0&0\\0&0&0\end{bmatrix},&&
+&G=\begin{bmatrix}1&1&0\\0&1&1\\0&0&1\end{bmatrix}.\\
+\end{align*}
+One easily computes the exponentials $W,X,Y,Z$:
+\[
+e^{Wt}=\begin{bmatrix}1&0&0\\0&e^t&0\\0&0&e^{2t}\end{bmatrix},
+e^{Xt}=\begin{bmatrix}1&0&0\\0&1&t\\0&0&1\end{bmatrix},
+e^{Yt}=\begin{bmatrix}1&t&0\\0&1&0\\0&0&1\end{bmatrix},
+e^{Zt}=\begin{bmatrix}1&0&0\\0&e^{-t}&0\\0&0&e^{-2t}\end{bmatrix}.
+\]
+
+The crux of the proof will be based on the following asymmetry between $X$ and $Y$,
+which leaves the top right corner zero in one case but nonzero in the other. As we will later
+observe, once the top right corner is nonzero, it cannot be cleared.
+\[
+e^{Xt}e^{Yu}=\begin{bmatrix}1&u&0\\0&1&t\\0&0&1\end{bmatrix},\qquad
+e^{Yt}e^{Xu}=\begin{bmatrix}1&u&tu\\0&1&t\\0&0&1\end{bmatrix}.
+\]
+
+\begin{proposition}\label{prop:eq_has_forced_order}
+If there exist $p\in\Naturals$, $A_{i}\in\lbrace W,X,Y,Z\rbrace$ and $t_{i}>0$, for $i\in\lbrace 1,\ldots,p\rbrace$,
+such that $\prod_{i=1}^{p} e^{A_{i}t_{i}}=G$, then the product contains at least one\footnote{Note
+that this is not entirely trivial because we required only positive $t_{i}$ in the product.}
+``$X$'' and one ``$Y$'', and all the ``$X$'' appear before the ``$Y$''.
+Formally, there exist $i$ and $j$ such that $A_{i}=X$ and $A_{j}=Y$, and for
+any such choice we have $i<j$.
+\end{proposition}
+
+\begin{proof}
+First observe that any such product is always an upper triangular matrix with
+non-negative entries (because all the matrices have non-negative entries) and positive
+entries on the diagonal. Let $M$ be such a matrix; we denote its coefficients by
+$0$ if they are zero and $+$ if they are positive.
+The following automaton should be read as follows: an arrow from $M$ to $M'$ annotated with $A$ means that any product
+of a matrix of the shape of $M$ by $e^{At}$ with $t>0$ will give a matrix with the shape of $M'$. Note that the empty product gives the identity.
+One easily checks that the following transitions hold.
+\begin{center}
+\begin{tikzpicture}
+    \node(start) at (-1.5,0) {};
+    \node(id) at (0,0) {$\begin{bmatrix}+&0&0\\0&+&0\\0&0&+\end{bmatrix}$};
+    \node(cp) at (0,2) {$\begin{bmatrix}+&0&0\\0&+&+\\0&0&+\end{bmatrix}$};
+    \node(acp) at (3,2) {$\begin{bmatrix}+&+&0\\0&+&+\\0&0&+\end{bmatrix}$};
+    \node(ap) at (3,0) {$\begin{bmatrix}+&+&0\\0&+&0\\0&0&+\end{bmatrix}$};
+    \node(abcp) at (6,2) {$\begin{bmatrix}+&+&+\\0&+&+\\0&0&+\end{bmatrix}$};
+    \draw[->] (start) -- (id);
+    \draw[->] (id) to node[auto] {$X$} (cp);
+    \draw[->] (id) to node[auto] {$Y$} (ap);
+    \draw[->] (cp) to node[auto] {$Y$} (acp);
+    \draw[->] (acp) to node[auto] {$X$} (abcp);
+    \draw[->] (ap) to node[auto] {$X$} (abcp);
+    \draw[->,loop below] (id) to node[auto] {$W,Z$} (id);
+    \draw[->,loop below] (ap) to node[auto] {$W,Z,Y$} (ap);
+    \draw[->,loop above] (cp) to node[auto] {$W,Z,X$} (cp);
+    \draw[->,loop above] (acp) to node[auto] {$W,Z,Y$} (acp);
+    \draw[->,loop above] (abcp) to node[auto] {$W,X,Y,Z$} (abcp);
+\end{tikzpicture}
+\end{center}
+Starting from the identity and applying the different products $e^{A_{i}t_{i}}$ in the automaton,
+it is clear that the only way to reach a matrix of the shape of $G$ is to have all
+the ``$X$'' before ``$Y$''. Formally, by contradiction, if there were $i<j$ such
+that $A_{i}=Y$ and $A_{j}=X$ then by the automaton, we would end up with a matrix where
+the top right corner is nonzero, which contradicts $G=\prod_{i=1}^{p} e^{A_{i} t_{i}}$.
+\end{proof}
+
+The previous lemma shows that this semigroup enforces a partial order on the matrices
+in products that reach the matrix $G$. The next lemma shows that $G$ can indeed be reached using this
+kind of products, essentially proving that $G$ belongs to this semigroup.
+
+\begin{proposition}\label{prop:forced_order_exists}
+For any positive real $t$, there exists a non-negative real $u$ such that
+\[e^{Wu}e^{Xt}e^{Yt}e^{Zu}=G\quad\text{ or }\quad e^{Zu}e^{Xt}e^{Yt}e^{Wu}=G.\]
+\end{proposition}
+
+\begin{proof}
+Consider the following products for an arbitrary $u\geqslant0$:
+\begin{align*}
+e^{Wu}e^{Xt}e^{Yt}e^{Zu}&=\begin{bmatrix}1&0&0\\0&e^u&0\\0&0&e^{2u}\end{bmatrix}
+    \begin{bmatrix}1&t&0\\0&1&t\\0&0&1\end{bmatrix}
+\begin{bmatrix}1&0&0\\0&e^{-u}&0\\0&0&e^{-2u}\end{bmatrix}\\[5pt]
+&=\begin{bmatrix}1&0&0\\0&e^u&0\\0&0&e^{2u}\end{bmatrix}
+\begin{bmatrix}1&te^{-u}&0\\0&e^{-u}&te^{-2u}\\0&0&e^{-2u}\end{bmatrix}\\[5pt]
+&=\begin{bmatrix}1&te^{-u}&0\\0&1&te^{-u}\\0&0&1\end{bmatrix},
+\end{align*}
+and
+\[
+e^{Zu}e^{Xt}e^{Yt}e^{Wu}=\begin{bmatrix}1&te^{u}&0\\0&1&te^{u}\\0&0&1\end{bmatrix}.
+\]
+If $t\geqslant1$ then choosing $u=\ln t\geqslant0$ in the first product gives $G$,
+otherwise choosing $u=\ln\frac{1}{t}\geqslant0$ in the second product gives $G$.
+\end{proof}
+
+\subsection{Undecidability of the semigroup problem}
+
+We will now show the undecidability of MESP\@. First, we remind the reader of~\cref{def:MESP}.
+\MESP*
+
+In short, the difference is that we do not fix the order of the matrices in the product, and that each matrix may be used more than once. We will now show the following key result.
+
+\begin{theorem}
+  MESP is undecidable in the non-commutative case.
+\end{theorem}
+
+\begin{proof}
+We have seen in the previous section that MEP is undecidable in the non-commutative
+case. Thus it suffices to reduce MEP to MESP to show undecidability.
+
+Let $A_1,\ldots,A_k,C\in\Algebraics^{n\times n}$ be an instance of MEP\@. Denote by $I_m$ the identity of size $m$,
+$0_m$ the zero matrix of size $m$. Recall the $3 \times 3$ matrices $W,X,Y,Z,G$, defined in \cref{sec:lics_gadget}.
+For every $i\in\lbrace 2,\ldots,k-1\rbrace$, define the following matrices:
+\begin{align*}
+&B_{i}=\begin{bmatrix}A_{i}&&&&\\&0_{3(i-2)}&&&\\&&Y&&\\&&&X&\\&&&&0_{3(k-1-i)}\end{bmatrix},
+&B_{i}'=\begin{bmatrix}0_n&&&&\\&0_{3(i-2)}&&&\\&&Y&&\\&&&X&\\&&&&0_{3(k-1-i)}\end{bmatrix}.
+\end{align*}
+
+We also define the matrices matrices
+%\[
+%\begin{array}{r@{}c@{}cr@{}c}
+%B_1=&\begin{bmatrix}A_1&&\\&X&\\&&0_{3(k-2)}\end{bmatrix},&&
+%B_1'=&\begin{bmatrix}0_n&&\\&X&\\&&0_{3(k-2)}\end{bmatrix},\\
+%B_k=&\begin{bmatrix}A_1&&\\&0_{3(k-2)}&\\&&Y\end{bmatrix},&&
+%B_k'=&\begin{bmatrix}0_n&&\\&0_{3(k-2)}&\\&&Y\end{bmatrix}.\\
+%\end{array}\]
+\begin{align*}
+&B_1=\begin{bmatrix}A_1&&\\&X&\\&&0_{3(k-2)}\end{bmatrix},&&
+&B_1'=\begin{bmatrix}0_n&&\\&X&\\&&0_{3(k-2)}\end{bmatrix},\\[5pt]
+&B_k=\begin{bmatrix}A_1&&\\&0_{3(k-2)}&\\&&Y\end{bmatrix},&&
+&B_k'=\begin{bmatrix}0_n&&\\&0_{3(k-2)}&\\&&Y\end{bmatrix},\\
+\end{align*}
+and, for every $i\in\lbrace 1,\ldots,k-1\rbrace$,
+\begin{align*}
+&W_{i}=\begin{bmatrix}0_n&&&\\&0_{3(i-1)}&&\\&&W&\\&&&0_{3(k-1-i)}\end{bmatrix},
+&Z_{i}=\begin{bmatrix}0_n&&&\\&0_{3(i-1)}&&\\&&Z&\\&&&0_{3(k-1-i)}\end{bmatrix}.
+\end{align*}
+
+Finally, we define the target matrix:
+\[C'=\begin{bmatrix}C&&&\\&G&&\\&&\ddots&\\&&&G\end{bmatrix}.\]
+We can now define our MESP instance as follows, the target matrix is $C'$ and the semigroup $\mathcal{G}$
+is generated by
+\begin{align*}
+&\left\lbrace e^{B_{i}t_{i}},e^{B_{i}'t_{i}}:t_{i}\geqslant0,i=1,\ldots,k\right\rbrace \\
+&\cup\left\lbrace e^{W_{i}t_{i}},e^{Z_{i}t_{i}}:t_{i}\geqslant0,i=1,\ldots,k-1\right\rbrace.
+\end{align*}
+We claim the original instance of MEP is satisfiable if and only if $C'\in\mathcal{G}$.
+Let us examine both direction independently.
+
+Assume that the MEP instance is satisfiable. Then there exist $t_1,\ldots,t_k\geqslant0$ such that:
+\[\prod_{i=1}^{k}e^{A_{i}t_{i}}=C.\]
+Define $\tau=\max\lbrace t_1,\ldots,t_k\rbrace+1$ (note that $\tau>0$) and $t_{i}'=\tau-t_{i}\geqslant0$ for every $i\in\lbrace 1,\ldots,k\rbrace$.
+A straightforward calculation shows that:
+\begin{align*}
+\prod_{i=1}^{k}\left(e^{B_{i}t_{i}}e^{B_{i}'t_{i}'}\right)
+    &=\begin{bmatrix}\prod_{i=1}^{k}e^{A_{i}t_{i}}&&&\\&e^{X\tau}e^{Y\tau}&&\\&&\ddots&\\&&&e^{X\tau}e^{Y\tau}\end{bmatrix}\\
+    &=\begin{bmatrix}C&&&\\&U&&\\&&\ddots&\\&&&U\end{bmatrix},
+\end{align*}
+where $U=e^{X\tau}e^{Y\tau}$. Apply \cref{prop:forced_order_exists} to get $\lambda\geqslant0$
+such that either $e^{W\lambda}Ue^{Z\lambda}=G$ or $e^{Z\lambda}Ue^{W\lambda}=G$. In the first case, conclude by
+checking that
+\[
+\prod_{i=1}^{k-1}e^{W_{i}\lambda}\prod_{i=1}^{k}\left(e^{B_{i}t_{i}}e^{B_{i}'t_{i}'}\right)\prod_{i=1}^{k-1}e^{Z_{i}\lambda}
+    =\begin{bmatrix}C&&&\\&G&&\\&&\ddots&\\&&&G\end{bmatrix}=C'.
+\]
+In the second case, exchange the $W_{i}$ and $Z_{i}$ to get same result. This concludes the proof that
+the MESP instance is satisfiable, since all the products belong to $\mathcal{G}$.
+
+Assume that the MESP instance is satisfiable. Then there exists $t_1,\ldots,t_m>0$ (we can always take them positive)
+and $M_1,\ldots,M_m\in\big\lbrace B_{i},B_{i}':i=1,\ldots,k\rbrace\cup\big\lbrace W_{i},Z_{i}:i=1,\ldots,k-1\big\rbrace$
+such that
+\begin{equation}\label{eq:mesp_to_mep:prod_eq}
+\prod_{j=1}^{m}e^{M_{j}t_{j}}=C'.
+\end{equation}
+Observe that by construction, this product has the following form:
+\[\prod_{j=1}^{m}e^{M_{j}t_{j}}=\begin{bmatrix}V&&&\\&U_1&&\\&&\ddots&\\&&&U_{k-1}\end{bmatrix},\]
+where $V$ belongs to the semigroup generated by $\lbrace e^{A_{i}t}:t\geqslant0\rbrace$ and $U_{i}$ belongs
+to the semigroup generated by $\lbrace e^{Wt},e^{Xt},e^{Yt},e^{Zt}:t\geqslant0\rbrace$. Since
+\eqref{eq:mesp_to_mep:prod_eq} implies that $U_{i}=G$, we can apply \cref{prop:eq_has_forced_order}
+to get each product producing $U_{i}$ must have all its ``$X$'' before its ``$Y$''. Furthermore, each $U_{i}$
+must contain at least one $X$ and one $Y$ in its product. For any $i\in\lbrace 1,\ldots,k\rbrace$,
+let $k_{i}$ (resp., $k_{i}'$) denote
+the first (resp., last) index $j$ such that $M_{j}=B_{i}\text{ or }B_{i}'$. Those indices exists because
+of the proposition since at least one $B_{i}$ or $B_{i}$' must appear for every $i$
+to get both an $X$ and a $Y$ in each product giving $U_{i}$. Obviously $k_{i}\leqslant k_{i}'$
+by definition. We now claim that the proposition implies that:
+\[k_1\leqslant k_1'<k_2\leqslant k_2'<k_3\cdots<k_{k-1}\leqslant k_{k-1}'.\]
+Indeed, \cref{prop:eq_has_forced_order} ensures that in the product giving $U_1$,
+all the ``$X$'' appear before the ``$Y$'',
+but the only matrices that contribute some $X$ to $U_1$ are $B_1$ and $B_1'$,
+and the only matrices that contribute some $Y$ to $U_1$ are $B_2$ and $B_2'$.
+Thus $k_1'<k_2$, i.e. the last ``$X$'' coming from $B_1$ or $B_1'$ is before the first ``$Y$''
+coming from $B_2$ or $B_2'$. A similar reasoning ensures that $k_2'<k_3$ and so on.
+This shows that for any $i\in\lbrace 1,\ldots,k\rbrace$, if $M_{j}=B_{i}$ then $j\in\lbrace k_{i},\ldots,k_{i}'\rbrace$. Thus all
+the $B_1$ appear before the $B_2$ which appear before the $B_3$ and so on.
+However, since the $B_{i}$ are the only ones to contribute to $V$, then $V$ must be of the form:
+\[V=\prod_{i=1}^{k}e^{A_{i}t_{i}'},\]
+where $t_{i}'\geqslant0$ is the sum of all $t_{j}$ such that $M_{j}=B_{i}$.
+Finally $V=C$, so the instance of MEP is satisfiable.
+
+\end{proof}

@@ -1,0 +1,47 @@
+\section{Turing-degree of MESP}
+\label{sec:turing-degree-lics}
+
+We are interested in classifying the Turing-degree of MESP\@.
+We will place MESP in the first level of the arithmetical hierarchy conditionally on Schanuel's conjecture being true (\cref{thm:turing-degree-1}), and in the second level unconditionally (\cref{thm:turing-degree-2}).
+
+Given a set $A$, we define $A^{(0)}$ to be $A$, and for each $n \geq 1$ we inductively define $A^{(n+1)}$ as the Halting Problem for Turing machines with access to an oracle for solving $A^{(n)}$. We call $A^{(n)}$ the $n$-th \emph{Turing jump} of $A$.
+
+We have already seen that $\emptyset^{(1)} \leq MESP$ holds.
+
+\begin{theorem}
+\label{thm:turing-degree-2}
+$\mbox{MESP} \leq \emptyset^{(2)}$.
+\end{theorem}
+
+\begin{proof}
+Consider the functions
+\begin{equation*}
+    f_{\myvector{w}}(\myvector{t}) = {\left \| \prod \limits_{i=1}^{\lvert \myvector{w} \rvert} \exp(A_{w_{i}} t_{i}) - C \right \|}_{2}^{2}, \, \myvector{w} \in {\lbrace 1, \ldots, k \rbrace}^{\star}
+\end{equation*}
+and note that each $f_{\myvector{w}}$ is an exponential-polynomial which has the non-negative reals as co-domain. Clearly, this instance of MESP is positive if and only if some $f_{\myvector{w}}$ has a tangential zero.
+
+Before proceeding, note that exponential-polynomials are closed under differentiation, and that they are computable functions.
+
+Let $\myvector{b} : \Naturals \rightarrow {\lbrace 1, \ldots, k \rbrace}^{\star}$ be any computable surjection.
+
+For each $n \in \Naturals$ and $\myvector{w} \in \lbrace \myvector{b}(1), \ldots, \myvector{b}(n) \rbrace$, consider the Turing machine $A_{\myvector{w}, n}$ which does the following:
+for each $m \in \Naturals$, partition ${[0,n]}^{\lvert \myvector{w} \rvert}$ in an uniform grid, with mesh size $m^{-1}$, and compute the approximate value of $f_{\myvector{w}}$ with error at most $m^{-1}$ at each grid point;
+if it is ever the case that all the approximate values of $f_{\myvector{w}}$ are greater than $\left(1+ \frac{L_{\myvector{w}, n}\sqrt{\lvert \myvector{w} \rvert}}{2} \right) m^{-1}$ (where $L_{\myvector{w}, n}$ is an upper bound on ${\| \nabla f_{\myvector{w}} \|}\restriction_{[0,n]}$, which we can compute by using the triangle inequality and the monotonicity of the exponential function), $A_{\myvector{w}, n}$ halts.
+Due to the Mean Value Theorem and to the compactness of $[0,n]$, $A_{\myvector{w}, n}$ halts if and only if $f_{\myvector{w}} \restriction_{[0,n]}$ does not have zeroes.
+Thus, the instance of MESP is positive if and only if some $A_{\myvector{w}, n}$ loops.
+
+Now, consider the Turing machine $B$ with access to a Halting Problem oracle (that is, a $\emptyset^{(1)}$ oracle) which, for each $n \in \Naturals$ and $\myvector{w} \in \lbrace \myvector{b}(1), \ldots, \myvector{b}(n) \rbrace$, uses the oracle to decide whether $A_{\myvector{w}, n}$ halts; if that is ever not the case, $B$ halts. Finally, note that $B$ halts if and only if the MESP instance in consideration is positive.
+\end{proof}
+
+Moreover, the following result holds.
+
+\begin{theorem}
+\label{thm:turing-degree-1}
+If Schanuel's conjecture is true, $\mbox{MESP} \leq \emptyset^{(1)}$.
+\end{theorem}
+
+\begin{proof}
+Let $f_{\myvector{w}}, \myvector{w} \in {\lbrace 1, \ldots, k \rbrace}^{\star}$ be as in the proof of~\cref{thm:turing-degree-2}.
+Consider the Turing Machine $T$ which, for each $n \in \Naturals$ and $\myvector{w} \in \lbrace \myvector{b}(1), \ldots, \myvector{b}(n) \rbrace$, uses~\cref{thm:wilkie-macintyre} to decide whether $f_{\myvector{w}}$ admits a zero in the region ${[0,n]}^{\lvert \myvector{w} \rvert}$, and halts when such a zero is found.
+Then $T$ halts if and only if the instance of MESP under consideration is positive.
+\end{proof}

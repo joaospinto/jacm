@@ -1,0 +1,52 @@
+\section{Example}
+
+In the following example, $t_{1},t_{2}$ denote fresh variables ranging over the reals.
+Let $\lambda_{1}, \lambda_{2} \in \Reals \cap \Algebraics$ such that $\lambda_{1} > \lambda_{2}$ and consider the following commuting matrices $A_{1}, A_{2} \in {(\Reals \cap \Algebraics)}^{2 \times 2}$:
+
+\begin{align*}
+A_{i} = \begin{pmatrix} \lambda_{i} && 1 \\ 0 && \lambda_{i} \end{pmatrix}, i \in \lbrace 1, 2 \rbrace .
+\end{align*}
+
+One can easily see that
+\begin{align*}
+\exp(A_{i} t_{i}) &= \exp(\lambda_{i} t_{i} I) \exp(t_{i} (A_{i} - \lambda_{i} I)) \\
+&= \exp(\lambda_{i} t_{i})
+\exp \begin{pmatrix} 0 && t_{i} \\ 0 && 0 \end{pmatrix} \\
+&= \exp (\lambda_{i} t_{i})
+\begin{pmatrix} 1 && t_{i} \\ 0 && 1 \end{pmatrix}, i \in \lbrace 1, 2 \rbrace .
+\end{align*}
+
+Let $c_{1}, c_{2} \in \Reals \cap \Algebraics$ such that $c_{1}, c_{2} > 0$, and let
+\begin{align*}
+C = \begin{pmatrix} c_{1} && c_{2} \\ 0 && c_{1} \end{pmatrix} .
+\end{align*}
+
+We would like to determine whether there exists a solution $t_{1}, t_{2} \in \Reals$, $t_{1}, t_{2} \geq 0$ to
+\begin{align*}
+\exp(A_{1} t_{1}) \exp(A_{2} t_{2}) = C.
+\end{align*}
+
+This amounts to solving the following system of equations:
+\begin{align*}
+&\begin{cases}
+\exp(\lambda_{1} t_{1} + \lambda_{2} t_{2}) = c_{1} \\
+(t_{1} + t_{2}) \exp(\lambda_{1} t_{1} + \lambda_{2} t_{2}) = c_{2}
+\end{cases}
+&\Leftrightarrow \\
+&\begin{cases}
+\exp(t_{1} (\lambda_{1} - \lambda_{2}) + \frac{c_{2}}{c_{1}} \lambda_{2}) = c_{1} \\
+t_{2} = \frac{c_{2}}{c_{1}} - t_{1}
+\end{cases}
+&\Leftrightarrow \\
+&\begin{cases}
+t_{1} = \frac{\log(c_{1}) - \frac{c_{2}}{c_{1}} \lambda_{2}}{\lambda_{1} - \lambda_{2}} \\
+t_{2} = \frac{\frac{c_{2}}{c_{1}} \lambda_{1} - \log(c_{1})}{\lambda_{1} - \lambda_{2}}
+\end{cases}
+\end{align*}
+
+Then $t_{1}, t_{2} \geq 0$ holds if and only if
+\begin{align*}
+\lambda_{2} \leq \frac{c_{1}}{c_{2}} \log(c_{1}) \leq \lambda_{1} .
+\end{align*}
+
+Whether these inequalities hold amounts to comparing linear forms in logarithms of algebraic numbers. As we will see, this is decidable.

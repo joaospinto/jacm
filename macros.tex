@@ -1,0 +1,56 @@
+\theoremstyle{plain}
+%\newtheorem{theorem}{Theorem}
+%\newtheorem{lemma}[theorem]{Lemma}
+%\newtheorem{proposition}[theorem]{Proposition}
+%\newtheorem{corollary}[theorem]{Corollary}
+%\newtheorem{conjecture}[theorem]{Conjecture}
+
+%\theoremstyle{definition}
+%\newtheorem{definition}{Definition}
+
+%\theoremstyle{remark}
+%\newtheorem*{remark}{Remark}
+%\newtheorem*{example}{Example}
+
+%BEGIN_MACRO
+
+\newcounter{term}
+\renewcommand*{\theterm}{\Alph{term}}
+\newcommand*{\termcrefname}{term}
+\AtBeginDocument{%
+  \let\mylabel\label
+}
+\newcommand{\mytag}[1]{%
+  \begingroup % keep the effects of \refstepcounter local
+    \refstepcounter{term}%
+    \mylabel{#1}%
+    \text{\theterm}%
+  \endgroup
+}
+%END_MACRO
+
+\DeclarePairedDelimiter{\diagfences}{(}{)}
+\newcommand{\diag}{\operatorname{diag}\diagfences}
+
+\newcommand{\cL}{{\mathcal{L}}}
+\newcommand{\cA}{{\mathcal{A}}}
+\newcommand{\defemph}[1]{\textbf{\textsl{#1}}}  % needed?
+
+\newcommand{\Reals}{\mathbb{R}}
+\newcommand{\Complex}{\mathbb{C}}
+\newcommand{\Rationals}{\mathbb{Q}}
+\newcommand{\Algebraics}{\overline{\Rationals}}
+\newcommand{\Integers}{\mathbb{Z}}
+\newcommand{\Naturals}{\mathbb{N}}
+
+\newcommand{\myvector}{\boldsymbol}
+
+\newcommand{\PTIME}{\textbf{PTIME}}
+\newcommand{\NP}{\textbf{NP}}
+\newcommand{\coNP}{co-\NP}
+\newcommand{\PSPACE}{\textbf{PSPACE}}
+\newcommand{\EXPSPACE}{\textbf{EXPSPACE}}
+
+\newcommand{\dist}{\operatorname{dist}}
+\DeclarePairedDelimiter{\closurefences}{(}{)}
+\newcommand{\closure}{\operatorname{Cl}\closurefences}

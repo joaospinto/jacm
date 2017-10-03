@@ -1,0 +1,81 @@
+\label{sec:mult}
+
+This section introduces some concepts concerning groups of multiplicative relations among algebraic numbers. We assume a natural first-order interpretation of the field of complex numbers in the ordered field of real numbers (in which each complex number is encoded as a pair comprising its real and imaginary parts). Under this interpretation we refer to sets of complex numbers as being semi-algebraic and first-order definable.
+
+Let $\mathbb{T}=\lbrace z \in \Complex: \lvert z \rvert = 1 \rbrace$. We define the \emph{$s$-dimensional torus} to be $\mathbb{T}^s$, considered as a group under componentwise multiplication. Then the function $x \mapsto \exp(2 \pi i x)$ is a homomorphism from the additive group of real numbers to $\mathbb{T}$, with kernel the subgroup of integers. By abuse of notation, we will also allow $\exp$ to be applied component-wise to a vector of reals.
+
+Given a tuple of algebraic numbers $\myvector{\lambda} = (\lambda_{1}, \ldots, \lambda_{s}) \in \mathbb{T}^{s}$, we consider how to effectively represent the \emph{orbit}
+\begin{equation*}
+\lbrace \myvector{\lambda}^{n} : n \in \Naturals \rbrace.
+\end{equation*}
+More precisely, we will give an algebraic representation of the topological closure of that orbit in $\mathbb{T}^s$.
+
+The \emph{group of multiplicative relations} of $\myvector{\lambda}$, which is an additive subgroup of $\Integers^s$, is defined as
+\begin{equation*}
+\cL(\myvector{\lambda})=\lbrace \myvector{v}\in \Integers^s : \myvector\lambda^{\myvector v}=1 \rbrace \, ,
+\end{equation*}
+where $\myvector\lambda^{\myvector v}$ is defined to be $\lambda_1^{v_1}\cdots\lambda_s^{v_s}$ for $\myvector{v}\in \Integers^s$, that is, exponentiation acts coordinatewise.
+
+Since $\Integers^s$ is a free abelian group, its subgroups are also
+free.  In particular, $\cL(\myvector\lambda)$ has a finite basis. The
+following powerful theorem of Masser~\cite{Mas88} gives bounds on the
+magnitude of the components of such a basis.
+
+Note that $\log(\alpha_{1}), \ldots, \log(\alpha_{m})$ are linearly independent over $\Rationals$ if and only if
+\begin{align*}
+\cL(\alpha_{1}, \ldots, \alpha_{m}) = \lbrace \myvector{0} \rbrace .
+\end{align*}
+Together with \cref{thm:Baker}, Masser's theorem allows us to eliminate all algebraic relations in the description of linear forms in logarithms of algebraic numbers, and therefore also to test whether a linear form in logarithms of algebraic numbers is zero.
+
+\begin{theorem}[Masser]
+\label{thm:masser}
+The free abelian group $\cL(\myvector{\lambda})$ has a basis $\myvector{v}_1, \ldots, \myvector{v}_{l} \in \Integers^{s}$ for which
+\[ \max\limits_{1\leq i\leq l,1\leq j\leq s} \lvert v_{i,j} \rvert \leq (D\log H)^{O(s^2)} \]
+where $H$ and $D$ bound respectively the heights and degrees of all the $\lambda_{i}$.
+\end{theorem}
+Membership of a tuple $\myvector{v}\in \Integers^{s}$ in $\cL(\myvector{\lambda})$ can be computed in polynomial space, using a decision procedure for the existential theory of the reals. In combination with \cref{thm:masser}, it follows that we can compute a basis for $\cL(\myvector{\lambda})$ in polynomial space by brute-force search (due to Savitch's theorem~\cite{Savitch}).
+
+Corresponding to $\cL(\myvector{\lambda})$, we consider the following
+multiplicative subgroup of $\mathbb{T}^{s}$:
+\begin{equation*}
+T(\myvector{\lambda})=\lbrace \myvector{\mu} \in \mathbb{T}^{s} : \forall \myvector{v} \in \cL(\myvector{\lambda}), \, \myvector{\mu}^{\myvector{v}} = 1 \rbrace \, .
+\end{equation*}
+If $\mathcal{B}$ is a basis of $\cL(\myvector{\lambda})$ then we can
+equivalently characterise $T(\myvector{\lambda})$ as
+\begin{equation*}
+\lbrace \myvector{\mu} \in \mathbb{T}^{s}: \forall \myvector{v} \in \mathcal{B}, \, \, \myvector{\mu}^{\myvector{v}} = 1 \rbrace \, .
+\end{equation*}
+Crucially, this finitary characterisation allows us to represent $T(\myvector\lambda)$ as a semi-algebraic set.
+
+We will use \cref{thm:Kronecker} to show that the orbit $\lbrace 
+\myvector\lambda^n : n\in\Naturals \rbrace$ is a dense subset of
+$T(\myvector{\lambda})$.
+
+\begin{theorem}
+\label{dense}
+Let $\myvector{\lambda}\in\mathbb{T}^s$. Then the orbit $\lbrace \myvector\lambda^n : n\in\Naturals \rbrace$ is a dense subset of $T(\myvector{\lambda})$.
+\end{theorem}
+
+\begin{proof}
+Let $\myvector{\mu}$ be an arbitrary element of $T(\myvector{\lambda})$, and let $\myvector{\theta} \in \Reals^{s}$ be such that $\myvector{\lambda} = \exp(2 \pi i \myvector{\theta})$ (with exponentiation operating coordinatewise). Notice that $\myvector{\lambda}^{\myvector{v}} = 1$ if and only if $\myvector{v}^{T} \myvector{\theta} \in \Integers$.
+Similarly, we define $\myvector{\psi} \in \Reals^{s}$ to be such that $\myvector{\mu}=\exp(2 \pi i \myvector{\psi})$. Then the second condition in the statement of \cref{thm:Kronecker} holds for $\myvector{\theta}$ and $\myvector{\psi}$.
+Thus, given $\varepsilon>0$, there exist a non-negative integer $n$ and a vector $\myvector{p} \in \Integers^{s}$ such that $\dist(n \myvector{\theta} - \myvector{\psi}, \myvector{p}) \leq \varepsilon$.
+Whence
+\begin{equation*}
+  \| \myvector{\lambda}^{n}-\myvector{\mu} \|_{\infty} = \| \exp( 2 \pi i (n\myvector{\theta} - \myvector{p})) - \exp(2 \pi i \myvector{\psi}) \|_{\infty} \leq \| 2 \pi (n\myvector{\theta} -\myvector{p} - \myvector{\psi}) \|_\infty \leq 2 \pi \varepsilon \, .
+\end{equation*}
+Given that $\varepsilon$ was arbitrary, it follows that $\lbrace \myvector{\lambda}^{n} : n \in \Naturals \rbrace$ is dense in $T(\myvector{\lambda})$.
+\end{proof}
+
+We will also need the following simple corollary:
+\begin{corollary}
+  Let $\myvector{\theta} \in \Reals^{s}$ be such that $\cA(\myvector{\theta}) = \lbrace \myvector{0} \rbrace$. Then $\lbrace \exp(2 \pi i n \myvector{\theta}) : n \in \Naturals \rbrace$ is a dense subset of $\mathbb{T}^s$.
+\label{corl:kronecker}
+\end{corollary}
+\begin{proof}
+This result follows from the fact that
+\begin{equation*}
+  \cL(\exp(2 \pi i \myvector{\theta})) = \cA(\myvector{\theta}) = \lbrace \myvector{0} \rbrace \, .
+\end{equation*}
+Therefore, $T(\myvector{\lambda}) = \mathbb{T}^{s}$, which establishes the result.
+\end{proof}

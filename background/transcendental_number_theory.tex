@@ -1,0 +1,57 @@
+\subsection{Transcendental Number Theory}
+
+%We will need the following results of Baker~\cite{Baker75}.
+%The first one, together with Masser's theorem, allows us
+%to eliminate all algebraic relations in the description of linear
+%forms in logarithms of algebraic numbers.
+
+A number of the form
+\begin{equation*}
+  \alpha_{0} + \alpha_{1} \log(\beta_{1}) + \cdots + \alpha_{n} \log(\beta_{n}),
+\end{equation*}
+where $\alpha_{0}, \ldots, \alpha_{n}, \beta_{1}, \ldots, \beta_{n}$ are algebraic numbers, is said to be a \emph{linear form in logarithms of algebraic numbers}. Note that the set of linear forms in logarithms of algebraic numbers is closed under addition and under multiplication by algebraic numbers, as well as under complex conjugation.
+
+The following result, together with \cref{thm:masser}, yields a method for comparing linear forms in logarithms of algebraic numbers. Note that there are other theorems by Alan Baker that would allow us to do this directly, namely by providing lower bounds on the absolute value of non-zero linear forms in logarithms of algebraic numbers as a function of the degrees and heights of the defining polynomials of the algebraic numbers appearing therein; for simplicity, we will not discuss these results in this thesis. For a proof, see~\cite{Baker75} and~\cite{BW93}.
+
+\begin{theorem}[Baker]
+\label{thm:Baker}
+Let $\alpha_{1}, \ldots, \alpha_{m} \in \Algebraics \setminus \lbrace 0 \rbrace$. If
+\begin{align*}
+\log(\alpha_{1}), \ldots, \log(\alpha_{m})
+\end{align*}
+are linearly independent over $\Rationals$, then
+\begin{align*}
+1, \log(\alpha_{1}), \ldots, \log(\alpha_{m})
+\end{align*}
+are linearly independent over $\Algebraics$.
+\end{theorem}
+
+%The next result essentially implies that one can effectively check
+%whether a linear form in logarithms of algebraic numbers equals
+%zero. Noting that the set of linear forms in logarithms of algebraic
+%numbers is closed under addition and multiplication by algebraic
+%numbers, it easily follows that one can effectively compare two linear
+%forms in logarithms of algebraic numbers. It is also closed under
+%complex conjugation. See~\cite{Baker75} and~\cite{BW93}.
+
+%\begin{theorem}[Baker]
+%Let $\alpha_{1}, \ldots, \alpha_{m}$ be non-zero algebraic numbers with degrees at most $d$ and heights at most $A$. Further, let $\beta_{0}, \ldots, \beta_{m}$ be algebraic numbers with degrees at most $d$ and heights at most $B$, where $B \geq 2$. Write
+%\begin{align*}
+%\Lambda = \beta_{0} + \beta_{1} \log(\alpha_{1}) + \cdots + \beta_{m} \log(\alpha_{m}) .
+%\end{align*}
+%Then either $\Lambda = 0$ or $\lvert \Lambda \rvert > B^{-C}$, where $C$ is an effectively computable number depending only on $m$, $d$, $A$, and the chosen branch of the complex logarithm.
+%\end{theorem}
+
+The theorem below was proved by Ferdinand von Lindemann in 1882, and later generalised by Karl Weierstrass in what is now known as the Lindemann-Weierstrass theorem. As a historical note, this result marked the first proof of transcendence of $\pi$, which immediately follows from it.
+
+\begin{theorem}[Lindemann]
+If $\alpha \in \Algebraics \setminus \lbrace 0 \rbrace$, then $e^{\alpha}$ is transcendental.
+\end{theorem}
+
+We will later present a result that holds if the following conjecture, which generalises many other theorems from transcendental number theorem (including Baker's theorem and the Lindemann-Weierstrass theorem), is true.
+
+\begin{conjecture}[Schanuel]
+  If $\alpha_{1}, \ldots, \alpha_{m} \in \Complex$ are linearly independent over $\Rationals$, then $\Rationals(\alpha_{1}, \exp(\alpha_{1}), \ldots, \alpha_{m}, \exp(\alpha_{m}))$ has transcendence degree at least $m$.
+\end{conjecture}
+Note that the transcendence degree of a field extension of $\Rationals$ is the cardinality of the largest algebraically independent subset thereof, so having transcendence degree at least $m$ means that there is a set of at least $m$ elements that satisfies no non-zero polynomial relation with integer coefficients.
+Whilst we will not make use of this conjecture directly, we will use~\cref{thm:wilkie-macintyre}, which does rely on Schanuel's conjecture being true. Obviously, all conditional results will be marked as such.

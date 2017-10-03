@@ -1,0 +1,78 @@
+\subsection{Matrix exponentials}
+\label{sec:matrix_exp}
+
+Given a matrix $A \in \Complex^{d \times d}$, its exponential is defined as
+\begin{align*}
+\exp(A) = \sum \limits_{i=0}^{\infty} \frac{A^{i}}{i!} .
+\end{align*}
+The series above always converges, and so the exponential of a matrix is always well defined.
+The standard way of computing $\exp(A)$ is by finding $P \in \mathit{GL}_{d}(\Complex)$ such that $J=P^{-1}AP$ is in Jordan Canonical Form, and by using the fact that $\exp(A) = P \exp(J) P^{-1}$, where $\exp(J)$ is efficiently computable.
+When $A \in \Algebraics^{d \times d}$ (where $\Algebraics$ denotes the set of algebraic numbers; see~\cref{sec:ant}), $P$ can be taken to be in $GL_{d}(\Algebraics)$; note that, due to~\cref{eq:jordan_powers}, if
+\begin{align*}
+J &= \begin{pmatrix}
+\lambda && 1 && 0 && \cdots && 0 \\
+0 && \lambda && 1 &&\cdots && 0 \\
+\vdots && \vdots && \ddots && \ddots && \vdots \\
+0 && 0 && \cdots && \lambda && 1 \\
+0 && 0 && \cdots && 0 && \lambda
+\end{pmatrix}
+\end{align*}
+then
+\begin{align*}
+\exp(Jt) &= \exp(\lambda t) \begin{pmatrix}
+1 && t && \frac{t^{2}}{2} && \cdots && \frac{t^{k-1}}{(k-1)!} \\
+0 && 1 && t && \cdots && \frac{t^{k-2}}{(k-2)!} \\
+\vdots && \vdots &&\ddots && \ddots && \vdots \\
+0 && 0 && \cdots && 1 && t \\
+0 && 0 && \cdots && 0 && 1
+\end{pmatrix} .
+\end{align*}
+
+Then $\exp{(J)}$ can be obtained by setting $t=1$, in particular $\exp{(J)}_{ij} = \frac{\exp(\lambda)}{(j-i)!}$ if $j \geq i$ and $0$ otherwise.
+
+When $A$ and $B$ commute, then so do $\exp(A)$ and $\exp(B)$. Moreover, when $A$ and $B$ have algebraic entries, the converse also holds, as shown in~\cite{MatrixExps}. Also, when $A$ and $B$ commute, then $\exp{(A)}\exp{(B)} = \exp{(A+B)}$.
+
+\begin{proposition}
+  Let $\myvector{v}$ lie in the generalised eigenspace
+  $\mathcal{V}_{\lambda}$ for some $\lambda \in \sigma(A)$.  Then
+  $\myvector{b}^{T}\exp(At)\myvector{v}$ is a linear combination
+  of terms of the form $t^{n}\exp(\lambda t)$.
+\label{prop:linear}
+\end{proposition}
+% Every expression of the form
+%  $\myvector{b}^{T}\exp(At)\myvector{x}_{0}$ is a linear
+%  combination of terms of the form $t^{n}\exp(\lambda t)$, where
+%  $\lambda$ is an eigenvalue of $A$.
+
+\begin{proof}
+  Note that, if $A=Q^{-1}JQ$ and $J=\diag{J_{1},\ldots,J_{N}}$ is a block diagonal Jordan matrix, then $\exp(At)=Q^{-1}\exp(Jt)Q$ and $\exp(Jt)=\diag{\exp(J_{1}t),\ldots,\exp(J_{N}t)}$.
+The result follows by observing that $Q\myvector{v}$ is zero in every component other than those pertaining the block corresponding to the eigenspace $\mathcal{V}_{\lambda}$.
+\end{proof}
+
+\subsection{Matrix logarithms}
+
+The matrix $B$ is said to be a logarithm of the matrix $A$ if $\exp(B) = A$. It is well known that a logarithm of a matrix $A$ exists if and only if $A$ is invertible. However, matrix logarithms need not be unique. In fact, there exist matrices admitting uncountably many logarithms. See, for example,~\cite{MatrixLogs1} and~\cite{MatrixLogs2}.
+
+A matrix is said to be unitriangular if it is triangular and all its diagonal entries equal $1$. Crucially, the following uniqueness result holds:
+
+\begin{theorem}
+\label{thm:log_uniqueness}
+Given an upper unitriangular matrix $M \in \Complex^{d \times d}$, there exists a unique strictly upper triangular matrix $L$ such that $\exp(L)=M$. Moreover, the entries of $L$ lie in the number field $\Rationals(M_{i,j}: 1 \leq i,j \leq d)$.
+\end{theorem}
+
+\begin{proof}
+Firstly, we show that, for any strictly upper triangular matrix $T$ and for any $1<m<d$ and $i<j$, the term ${(T^{m})}_{i,j}$ is a polynomial in the elements of the set $\lbrace T_{r,s} : s-r<j-i \rbrace$. This can be seen by induction on $m$, as each $T^{m}$ is strictly upper triangular, and so
+\begin{align*}
+{(T^{m})}_{i,j} = \sum\limits_{l=1}^{d} {(T^{m-1})}_{i,l} T_{l,j} = \sum\limits_{l=i+1}^{j-1} {(T^{m-1})}_{i,l} T_{l,j} .
+\end{align*}
+
+Finally, we show, by induction on $j-i$, that each entry $L_{i,j}$ is a polynomial in the elements of the set
+\begin{align*}
+\lbrace M_{i,j} \rbrace \cup \lbrace M_{r,s} : s-r < j-i \rbrace .
+\end{align*}
+If $j-i \leq 0$, then $L_{i,j}=0$, so the claim holds. When $j-i>0$, as $L$ is nilpotent (as it is strictly upper triangular),
+\begin{align*}
+M_{i,j} &= \exp{(L)}_{i,j} = L_{i,j} + \sum\limits_{m=2}^{d-1} \frac{1}{m!} {(L^{m})}_{i,j} \\ \Rightarrow L_{i,j} &= M_{i,j} - \sum\limits_{m=2}^{d-1} \frac{1}{m!} {(L^{m})}_{i,j} .
+\end{align*}
+The result now follows from the induction hypothesis and from our previous claim, as this argument can be used to both construct such a matrix $L$ and to prove that it is uniquely determined.
+\end{proof}

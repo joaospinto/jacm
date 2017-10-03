@@ -1,0 +1,44 @@
+\subsection{Properties of commuting matrices}
+
+We will now present a useful decomposition of $\Complex^{d}$ induced by the commuting matrices $A_{1}, \ldots, A_{k} \in \Complex^{d \times d}$. We remind the read that $\sigma(A_{i})$ denotes the spectrum of the matrix $A_{i}$. In what follows, let
+\begin{align*}
+\myvector{\lambda} = (\lambda_{1}, \ldots, \lambda_{k}) \in \sigma(A_{1}) \times \cdots \times \sigma(A_{k}) .
+\end{align*}
+The generalised eigenspace of $\lambda_{i}$ of $A_{i}$ corresponds to $\ker{(A_{i} - \lambda_{i} I)}^{d}$, as the sequence ${(\ker{(A_{i} - \lambda_{i} I)}^{n})}_{n \in \Naturals}$ stabilises at most when $n=d$. With that in mind, we define the following subspaces of $\Complex^{d}$:
+\begin{align*}
+\mathcal{V}_{\myvector{\lambda}} = \bigcap \limits_{i=1}^{k} \ker{(A_{i} - \lambda_{i} I)}^{d}.
+\end{align*}
+Also, let $\Sigma = \lbrace \myvector{\lambda} \in \sigma(A_{1}) \times \cdots \times \sigma(A_{k}) : \mathcal{V}_{\myvector{\lambda}} \neq \lbrace \myvector{0} \rbrace \rbrace$.
+Below, $A_{i} \restriction_{\mathcal{V}_{\myvector{\lambda}}}$ denotes the restriction of the linear operator $A_{i}$ to the linear subspace $\mathcal{V}_{\myvector{\lambda}}$, which is invariant under $A_{i}$.
+
+\begin{theorem}
+\label{subspace_decomposition}
+For all $\myvector{\lambda} = (\lambda_{1}, \ldots, \lambda_{k}) \in \Sigma$ and for all $i \in \lbrace 1, \ldots, k \rbrace$, the following properties hold:
+
+\begin{enumerate}
+
+\item $\mathcal{V}_{\myvector{\lambda}}$ is invariant under $A_{i}$.
+
+\item $\sigma(A_{i} \restriction_{\mathcal{V}_{\myvector{\lambda}}}) = \lbrace \lambda_{i} \rbrace$.
+
+\item $\Complex^{d} = \bigoplus \limits_{\myvector{\lambda} \in \Sigma} \mathcal{V}_{\myvector{\lambda}}$.
+
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+We show, by induction on $k$, that the subspaces $\mathcal{V}_{\myvector{\lambda}}$ satisfy the properties above.
+
+When $k = 1$, the result follows from the existence of Jordan Canonical Forms. When $k > 1$, suppose that $\sigma(A_{k}) = \lbrace \mu_{1}, \ldots, \mu_{m} \rbrace$, and let $\mathcal{U}_{j} = \ker{(A_{k} - \mu_{j} I)}^{d}$, for $j \in \lbrace 1, \ldots, m \rbrace$. Again, it follows from the existence of Jordan Canonical Forms that
+\begin{align*}
+\Complex^{d} = \bigoplus \limits_{j = 1}^{m} \mathcal{U}_{m} .
+\end{align*}
+In what follows, $i \in \lbrace 1, \ldots, k-1 \rbrace$ and $j \in \lbrace 1, \ldots, m \rbrace$. Now, as $A_{k}$ and $A_{i}$ commute, so do $(A_{k}-\mu_{j} I)$ and $A_{i}$. Therefore, for all $\myvector{v} \in \mathcal{U}_{j}$, ${(A_{k} - \mu_{j} I)}^{d} A_{i} \myvector{v} = A_{i} {(A-\mu_{j} I)}^{d} \myvector{v} = \myvector{0}$, so $A_{i} \myvector{v} \in \mathcal{U}_{j}$, that is, $\mathcal{U}_{j}$ is invariant under $A_{i}$. The result follows from applying the induction hypothesis to the commuting operators $A_{i} \restriction_{\mathcal{U}_{j}}$.
+\end{proof}
+
+We will also make use of the following well-known result on simultaneous triangularisation of commuting matrices. See, for example,~\cite{CommutingMatrices}.
+
+\begin{theorem}
+\label{thm:simultaneous-triangularisation}
+Given $k$ commuting matrices $A_{1}, \ldots, A_{k} \in \Algebraics^{d \times d}$, there exists a matrix $P \in \mathit{GL}_{d}(\Algebraics)$ such that $P^{-1}A_{i}P$ is upper triangular for all $i \in \lbrace 1, \ldots, k \rbrace$.
+\end{theorem}

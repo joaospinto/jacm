@@ -1,0 +1,18 @@
+\subsection{Hilbert's Tenth Problem}
+
+A set $S \subseteq \Integers^{d}$ is called \emph{Diophantine} if there exist $m \in \Naturals$ and $p \in \Integers[x_{1}, \ldots, x_{d+m}]$ such that
+\[ S = \lbrace \myvector{x} \in \Integers^{d} : \exists \myvector{y} \in \Integers^{m}, \, p(\myvector{x}, \myvector{y}) = 0 \rbrace \, . \]
+Equivalently, Diophantine sets correspond to those that are definable in the existential branch of the first-order theory of the ring of integers.
+
+In his famous list of 23 problems, Hilbert asked whether there exists an algorithm for deciding if a given polynomial $p \in \Integers[x_{1}, \ldots, x_{d}]$ admits any zero $\myvector{x} \in \Integers^{d}$; this was the tenth problem in his list.
+
+The following celebrated theorem, due to Yuri Matiyasevich, settled this question negatively, namely by showing that it is an undecidable problem; see~\cite{HTP} for a self-contained proof.
+
+\begin{theorem}[Matiyasevich]
+\label{thm:HTP}
+The recursively enumerable subsets of $\Integers^{d}$ are Diophantine.
+\end{theorem}
+
+It is obvious that the converse is also true, namely that all Diophantine sets are recursively enumerable, which follows from the existence of a computable surjection mapping $\Naturals$ to $\Integers^{d}$.
+
+\cref{thm:HTP} can be seen as a strengthening of the famous G\"{o}del-Rosser incompleteness theorem, which states that the first-order theory of the ring of integers is undecidable. Namely, this result shows that the existential branch of that theory is already undecidable.
