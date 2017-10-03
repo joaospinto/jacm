@@ -1,2 +1,2 @@
-# dphil_thesis
-Contains my DPhil thesis (or a draft thereof).
+# jacm
+Contains a paper draft.
