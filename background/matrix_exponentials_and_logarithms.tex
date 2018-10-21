@@ -28,7 +28,7 @@ then
 \end{pmatrix} .
 \end{align*}
 
-Then $\exp{(J)}$ can be obtained by setting $t=1$, in particular $\exp{(J)}_{ij} = \frac{\exp(\lambda)}{(j-i)!}$ if $j \geq i$ and $0$ otherwise.
+Note that $\exp{(J)}$ can be obtained by setting $t=1$, in particular $\exp{(J)}_{ij} = \frac{\exp(\lambda)}{(j-i)!}$ if $j \geq i$ and $0$ otherwise.
 
 When $A$ and $B$ commute, then so do $\exp(A)$ and $\exp(B)$. Moreover, when $A$ and $B$ have algebraic entries, the converse also holds, as shown in~\cite{MatrixExps}. Also, when $A$ and $B$ commute, then $\exp{(A)}\exp{(B)} = \exp{(A+B)}$.
 
@@ -51,9 +51,9 @@ The result follows by observing that $Q\myvector{v}$ is zero in every component 
 
 \subsection{Matrix logarithms}
 
-The matrix $B$ is said to be a logarithm of the matrix $A$ if $\exp(B) = A$. It is well known that a logarithm of a matrix $A$ exists if and only if $A$ is invertible. However, matrix logarithms need not be unique. In fact, there exist matrices admitting uncountably many logarithms. See, for example,~\cite{MatrixLogs1} and~\cite{MatrixLogs2}.
+A matrix $B$ is said to be a logarithm of the matrix $A$ if $\exp(B) = A$. It is well known that a logarithm of a matrix $A$ exists if and only if $A$ is invertible. However, matrix logarithms need not be unique. In fact, there exist matrices admitting uncountably many logarithms. See, for example,~\cite{MatrixLogs1} and~\cite{MatrixLogs2}.
 
-A matrix is said to be unitriangular if it is triangular and all its diagonal entries equal $1$. Crucially, the following uniqueness result holds:
+A matrix is said to be unitriangular if it is upper triangular and all its diagonal entries equal $1$. Crucially, the following uniqueness result holds:
 
 \begin{theorem}
 \label{thm:log_uniqueness}

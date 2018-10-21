@@ -33,6 +33,10 @@ real variables that appear in the statement of the problem.
 \end{itemize}
 \end{definition}
 
+These constraints will be useful in defining polynominal relations, as well as in enforcing
+that certain variables be integer multiples of $\pi$. They will play a crucial role in the
+reduction from Hilbert's Tenth Problem.
+
 A class of constraints $\mathcal{E} \subseteq \mathcal{E}_{\pi\Integers} \cup
 \mathcal{E}_{+}\cup \mathcal{E}_{\times}$
 induces a generalisation of the MEP problem as follows:
@@ -51,10 +55,10 @@ induces a generalisation of the MEP problem as follows:
 \end{definition}
 
 Note that in the above definition of MEP$(\mathcal{E})$ the set of
-constraints $E$ only mentions real variables $t_1,\ldots,t_k$
+constraints $E$ only utilises real variables $t_1,\ldots,t_k$
 appearing in the matrix equation $\prod_{i=1}^{k} e^{A_{i} t_{i}}=C$.
 However, without loss of generality, we can allow constraints to
-mention fresh variables $t_{i}$, for $i>k$, since we can always define a
+utilise fresh variables $t_{i}$, for $i>k$, since we can always define a
 corresponding matrix $A_i=0$ for such variables for then
 $e^{A_{i} t_{i}}=I$ has no effect on the matrix product.  In other words,
 we can without loss of generality have constraints in $\mathcal{E}$ with existentially
@@ -130,8 +134,7 @@ respective products.
 
 The core of the reduction is to show that the constraints in
 $\mathcal{E}_{\pi\Integers},\mathcal{E}_{+}$ and
-$\mathcal{E}_{\times}$ do not make the MEP problem harder: one can
-always encode them using the matrix product equation.
+$\mathcal{E}_{\times}$ do not make the MEP problem harder.
 
 \begin{proposition}
   MEP$(\mathcal{E}_{\pi\Integers} \cup \mathcal{E}_{+} \cup
@@ -150,8 +153,8 @@ always encode them using the matrix product equation.
   Let $t_{j}\in\alpha+\beta\pi\Integers$ be a constraint in $E$.  By definition
 of  $\mathcal{E}_{\pi\Integers}$
 we have
-  that $\cos(2\alpha\beta^{-1}),\sin(2\alpha\beta^{-1})$ and
-  $\beta\neq0$ are real algebraic.  Now define the following extra
+  that $\beta \neq 0$ and that both $\beta$ and $\cos(2\alpha\beta^{-1})$
+   are real algebraic.  The Pythagorean theorem implies that $\sin(2\alpha\beta^{-1})$ is also real algebraic.  Now define the following extra
   matrices:
 \[A'_j=\begin{bmatrix}0&2\beta^{-1}\\-2\beta^{-1}&0\end{bmatrix},
  C'=\begin{bmatrix}\cos(2\alpha\beta^{-1})&
@@ -166,7 +169,7 @@ e^{A'_j t_{j}}=C'
 =C'\\
 &\Leftrightarrow\cos(2t_{j}\beta^{-1})=\cos(2\alpha\beta^{-1}) \\
 &\qquad\wedge\sin(2t_{j}\beta^{-1})=\sin(2\alpha\beta^{-1}) \\
-&\Leftrightarrow2\beta^{-1}t_{j}\equiv 2\alpha\beta^{-1}\mod 2\pi \\
+  &\Leftrightarrow2\beta^{-1}t_{j}\equiv 2\alpha\beta^{-1} \pmod{2\pi} \\
 &\Leftrightarrow t_{j}\in\alpha+\beta\pi\Integers.
 \end{align*}
 Thus the additional matrix equation $e^{A_j't_{j}}=C'$ is equivalent to
@@ -186,7 +189,7 @@ the constraint $t_{j}\in\alpha+\beta\pi\Integers$.  Applying
   constraints on variables $t_1,\ldots,t_k$.  We proceed as above,
   showing how to remove each constraint in
   $\mathcal{E}_{\times}$ from $E$.  In so doing we potentially increase the
-  number of matrices and add new constraints from $\mathcal{E}_{+}$.
+  number and the dimension of matrices and add new constraints from $\mathcal{E}_{+}$.
 
   Let $t_l=t_{i} t_{j}$ be an equation in $E$.  To eliminate this equation
 the first step is to introduce fresh
@@ -311,6 +314,7 @@ Furthermore, the following extra product equation becomes:
 \end{bmatrix}\\
 &\Leftrightarrow\sum_{i=1}^{k}\alpha_{i} t_{i}=-\beta \, .
 \end{align*}
+The result follows by applying \cref{prop:combine}.
 \end{proof}
 
 Combining~\cref{lem:pi}, \cref{lem:times}, and \cref{lem:plus} we
@@ -345,11 +349,11 @@ have:
 
 As we have seen previously, it is easy to encode $Q$ with constraints,
 in the sense that we can compute a finite set of constraints
-$E_Q \subseteq \mathcal{E}_{+}\cup\mathcal{E}_{\times}$ mentioning variables
+$E_Q \subseteq \mathcal{E}_{+}\cup\mathcal{E}_{\times}$ utilising variables
 $t_0,\ldots,t_m,\lambda$
 such that $E$ is
 satisfied if and only if $t_0=Q(t_1,\ldots,t_k,\lambda)$. Note that
-$E_Q$ may need to mention variables other
+$E_Q$ may need to utilise variables other
 than $t_1,\ldots,t_k$ to do that.  Another
 finite set of equations
 $E_{\pi\Integers}\subseteq\mathcal{E}_{\pi\Integers}$ is used to

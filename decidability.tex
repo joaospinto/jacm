@@ -48,7 +48,7 @@ The Generalised MEP with commuting matrices reduces to LEP \@.
   that $P^{-1} A_{i} P$ is block-diagonal, with the $j$-th block being
   $\lambda_i^{(j)}I + N_i^{(j)}$ for $j=1,\ldots,b$.  Now
 \begin{align}
-\prod \limits_{i=1}^{k} \exp(A_{i} t_{i}) = C \Leftrightarrow \prod \limits_{i=1}^{k} \exp(P^{-1}A_{i}P t_{i}) = P^{-1}CP .
+\prod \limits_{i=1}^{k} \exp \left( A_{i} t_{i} \right) = C \Leftrightarrow \prod \limits_{i=1}^{k} \exp \left( P^{-1}A_{i}P t_{i} \right) = P^{-1}CP .
 \label{eq:block}
 \end{align}
 
@@ -59,7 +59,7 @@ negative. Otherwise, denoting the blocks $P^{-1}CP$ by $D^{(j)}$ for
 $j \in \lbrace 1, \ldots, b \rbrace$, our problem amounts to
 simultaneously solving the system of matrix equations
 \begin{align}
-\prod\limits_{i=1}^{k} \exp\big(\big(\lambda_i^{(j)}I + N_i^{(j)}\big)t_{i}\big) = D^{(j)}, \quad j \in \lbrace 1, \ldots, b \rbrace
+\prod\limits_{i=1}^{k} \exp\left(\left(\lambda_i^{(j)}I + N_i^{(j)}\right)t_{i}\right) = D^{(j)}, \quad j \in \lbrace 1, \ldots, b \rbrace
 \label{eq:main1}
 \end{align}
 with one equation for each block.
@@ -67,17 +67,17 @@ with one equation for each block.
 For each fixed $j$, the matrices $N_{i}^{(j)}$ inherit commutativity from
 the matrices $B^{(j)}_{i}$, so we have
 \begin{align*}
-\prod\limits_{i=1}^{k} \exp((\lambda_i^{(j)}I + N_i^{(j)})t_{i}) &=
-   \exp\big(\sum_{i=1}^{k} (\lambda_i^{(j)}I  +
- N_i^{(j)}) t_i \big)\\
-&= \exp\big(\sum_{i=1}^{k} \lambda_i^{(j)} t_i\big) \cdot
-   \exp\big(\sum_{i=1}^{k} N_i^{(j)} t_i \big) .
+\prod\limits_{i=1}^{k} \exp \left( (\lambda_i^{(j)}I + N_i^{(j)})t_{i} \right) &=
+   \exp \left(\sum_{i=1}^{k} (\lambda_i^{(j)}I  +
+ N_i^{(j)}) t_i \right)\\
+&= \exp\left(\sum_{i=1}^{k} \lambda_i^{(j)} t_i\right) \cdot
+   \exp\left(\sum_{i=1}^{k} N_i^{(j)} t_i \right) .
 \end{align*}
 
 Hence the system (\ref{eq:main1}) is equivalent to
 \begin{align}
-\exp\big(\sum_{i=1}^{k} \lambda_i^{(j)} t_i\big) \cdot
-   \exp\big(\sum_{i=1}^{k} N_i^{(j)} t_i \big)  = D^{(j)}
+\exp\left(\sum_{i=1}^{k} \lambda_i^{(j)} t_i\right) \cdot
+   \exp\left(\sum_{i=1}^{k} N_i^{(j)} t_i \right)  = D^{(j)}
 \label{eq:main2}
 \end{align}
 for $j=1,\ldots,b$.
@@ -88,8 +88,8 @@ Since the diagonal entries of
 $\exp\left(\sum_{i=1}^{k} N^{(j)}t_i\right)$
 are all $1$, the equation system (\ref{eq:main2}) is equivalent to:
 \begin{align*}
-\exp\big(\sum_{i=1}^{k} \lambda_i^{(j)} t_i\big)
-= c^{(j)} \mbox{ and }\exp\big(\sum_{i=1}^{k} N_i^{(j)} t_i \big)
+\exp\left(\sum_{i=1}^{k} \lambda_i^{(j)} t_i\right)
+= c^{(j)} \mbox{ and }\exp\left(\sum_{i=1}^{k} N_i^{(j)} t_i \right)
 =\frac{1}{c^{(j)}} D^{(j)}
 \end{align*}
 for $j=1,\ldots,b$.
@@ -97,7 +97,7 @@ for $j=1,\ldots,b$.
 Applying \cref{thm:log_uniqueness}, the
 above system can equivalently be written
 \begin{align*}
-\exp\big(\sum_{i=1}^{k} \lambda_i^{(j)} t_i\big)
+\exp\left(\sum_{i=1}^{k} \lambda_i^{(j)} t_i\right)
 = c^{(j)} \mbox{ and } \sum_{i=1}^{k}
 N_i^{(j)} t_i =
 S^{(j)}

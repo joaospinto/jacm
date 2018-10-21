@@ -15,7 +15,7 @@ maximum index over all eigenvalues of $A$. An eigenvalue $\lambda$ is said to be
 Given an eigenvalue $\lambda \in \sigma(A)$, we say that $\myvector{v} \in \Complex^{d}$ is a \emph{generalised eigenvector} of $A$ if $\myvector{v}\in \ker{(A-\lambda I)}^{k}$, for some $k\in\Naturals$.
 
 We denote the subspace of $\Complex^{d}$ spanned by the set of
-generalised eigenvectors associated with some eigenvalue $\lambda$ by
+generalised eigenvectors associated with each eigenvalue $\lambda$ by
 $\mathcal{V}_{\lambda}$. We denote the subspace of $\Complex^{d}$
 spanned by the set of generalised eigenvectors associated with some
 real eigenvalue by $\mathcal{V}^{r}$.  We likewise denote the subspace
@@ -39,7 +39,7 @@ $\myvector{v}^{c} \in\mathcal{V}^{c}$.
 We will need the following result:
 \begin{proposition}
 \label{conj-relation}
-Suppose that $\myvector{v}\in\mathbb{R}^{d}$ and that $\myvector{v}=\sum\limits_{\lambda\in\sigma(A)} \myvector{v}_{\lambda}$, where $\myvector{v}_{\lambda} \in\mathcal{V}_{\lambda}$. Then $\myvector{v}_{\overline{\lambda}}$ and $\myvector{v}_{\lambda}$ are component-wise complex conjugates.
+  Suppose that $\myvector{v}\in\mathbb{R}^{d}$ and that $\myvector{v}=\sum\limits_{\lambda\in\sigma(A)} \myvector{v}_{\lambda}$, where $\myvector{v}_{\lambda} \in\mathcal{V}_{\lambda}$. For all $\lambda \in \sigma(A)$, it holds that $\myvector{v}_{\overline{\lambda}}$ and $\myvector{v}_{\lambda}$ are component-wise complex conjugates.
 \end{proposition}
 
 \begin{proof}
@@ -89,13 +89,13 @@ computed in polynomial time, as shown in~\cite{Cai94}.
 
 Note that each vector $\myvector{v}$ appearing as a column of the
 matrix $Q^{-1}$ is a generalised eigenvector, and that the
-index $\nu(\lambda)$ of some eigenvalue $\lambda$ corresponds to the
+index $\nu(\lambda)$ of each eigenvalue $\lambda$ corresponds to the
 dimension of the largest Jordan block associated with it.
 
 One can obtain a closed-form expression for powers of block diagonal
 Jordan matrices, and use this to get a closed-form expression for
 the powers of any matrix $A$. In fact, if $J_{i}$ is a
-$k\times k$ Jordan block associated with some eigenvalue $\lambda$,
+$k\times k$ Jordan block associated with an eigenvalue $\lambda$,
 then
 %\noindent
 \begin{equation}

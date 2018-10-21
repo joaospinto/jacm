@@ -14,8 +14,8 @@ The Generalised Continuous Orbit Problem is undecidable.
 This can be shown by reduction from MESP. In particular, given square matrices $B_{1}, \ldots, B_{k}, C$, we construct matrices $A_{1}, \ldots, A_{k}$ and vectors $\myvector{x}, \myvector{y}$ for which
 \begin{equation}
   \label{eq:mesp-to-orbit}
-\prod \limits_{i=1}^{k} \exp(B_{i} t_{i}) = C \Leftrightarrow
-\prod \limits_{i=1}^{k} \exp(A_{i} t_{i}) \myvector{x} = \myvector{y} .
+  \prod \limits_{j=1}^{m} \exp(B_{i_{j}} t_{j}) = C \Leftrightarrow
+  \prod \limits_{j=1}^{m} \exp(A_{i_{j}} t_{j}) \myvector{x} = \myvector{y} .
 \end{equation}
 
 Let $\myvector{c}_{1}, \ldots, \myvector{c}_{n}$ be the columns of $C$, from left to right, and let $\myvector{e}_{1}, \ldots, \myvector{e}_{n}$ denote the canonical basis of $\Reals^{n}$. Then~\eqref{eq:mesp-to-orbit} can be achieved by setting, for each $i \in \lbrace 1, \ldots, n \rbrace$,
@@ -25,7 +25,7 @@ A_{i} =
 B_{i} && \cdots && 0 \\
 \vdots && \ddots && \vdots \\
 0 && \cdots && B_{i}
-\end{pmatrix},
+\end{pmatrix} \in \Reals^{n^{2} \times n^{2}},
 \end{equation*}
 as well as
 \begin{equation*}
@@ -63,12 +63,12 @@ Then
 \Leftrightarrow &\sum \limits_{j=1}^{n} \left( \myvector{u}_{j}^{T} \prod \limits_{i=1}^{k} \exp(B_{i} t_{i}) \myvector{v} \right)^{2} = 0 \\
 \Leftrightarrow &\sum \limits_{j=1}^{n} \left( \left( \myvector{u}_{j} \otimes \myvector{u}_{j} \right)^{T} \prod \limits_{i=1}^{k} \left( \exp( B_{i} t_{i} ) \otimes \exp(B_{i} t_{i}) \right) \left( \myvector{v} \otimes \myvector{v} \right) \right) = 0 \\
 \Leftrightarrow &\sum \limits_{j=1}^{n} \left( \left( \myvector{u}_{j} \otimes \myvector{u}_{j} \right)^{T} \prod \limits_{i=1}^{k} \exp\left((B_{i} \otimes I + I \otimes B_{i}) t_{i} \right) \left( \myvector{v} \otimes \myvector{v} \right) \right) = 0 \\
-\Leftrightarrow &\begin{pmatrix} \left(\myvector{u}_{1} \otimes \myvector{u}_{1}\right)^{T} \\ \vdots \\ \left(\myvector{u}_{n} \otimes \myvector{u}_{n}\right)^{T} \end{pmatrix}^{T} \prod \limits_{i=1}^{k} \exp( C_{i} t_{i} ) \begin{pmatrix} \myvector{v} \otimes \myvector{v} \\ \vdots \\ \myvector{v} \otimes \myvector{v} \end{pmatrix} = 0 .
+\Leftrightarrow &\begin{pmatrix} \myvector{u}_{1} \otimes \myvector{u}_{1} \\ \vdots \\ \myvector{u}_{n} \otimes \myvector{u}_{n} \end{pmatrix}^{T} \prod \limits_{i=1}^{k} \exp( C_{i} t_{i} ) \begin{pmatrix} \myvector{v} \otimes \myvector{v} \\ \vdots \\ \myvector{v} \otimes \myvector{v} \end{pmatrix} = 0 .
 \end{align*}
 
 The result then follows by taking
 \begin{equation*}
-  \myvector{w} = \begin{pmatrix} \left(\myvector{u}_{1} \otimes \myvector{u}_{1}\right)^{T} \\ \vdots \\ \left(\myvector{u}_{n} \otimes \myvector{u}_{n}\right)^{T} \end{pmatrix}
+  \myvector{w} = \begin{pmatrix} \myvector{u}_{1} \otimes \myvector{u}_{1} \\ \vdots \\ \myvector{u}_{n} \otimes \myvector{u}_{n} \end{pmatrix}
   \mbox{ and } \myvector{z} = \begin{pmatrix} \myvector{v} \otimes \myvector{v} \\ \vdots \\ \myvector{v} \otimes \myvector{v} \end{pmatrix} \, .
 \end{equation*}
 \end{proof}
