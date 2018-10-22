@@ -12,7 +12,7 @@ The \emph{index} of an eigenvalue $\lambda$, denoted
 by $\nu(\lambda)$, is its multiplicity as a zero of $m$. We
 use $\nu(A)$ to denote $\max_{\lambda\in\sigma(A)} \nu(\lambda)$: the
 maximum index over all eigenvalues of $A$. An eigenvalue $\lambda$ is said to be \emph{simple} if $\nu(\lambda) = 1$ and \emph{repeated} otherwise.
-Given an eigenvalue $\lambda \in \sigma(A)$, we say that $\myvector{v} \in \Complex^{d}$ is a \emph{generalised eigenvector} of $A$ if $\myvector{v}\in \ker{(A-\lambda I)}^{k}$, for some $k\in\Naturals$.
+Given an eigenvalue $\lambda \in \sigma(A)$, we say that $\myvector{v} \in \Complex^{d}$ is a \emph{generalised eigenvector} of $A$ if $\myvector{v}\in \ker{(A-\lambda I)}^{m}$, for some $m\in\Naturals$.
 
 We denote the subspace of $\Complex^{d}$ spanned by the set of
 generalised eigenvectors associated with each eigenvalue $\lambda$ by
@@ -43,10 +43,10 @@ We will need the following result:
 \end{proposition}
 
 \begin{proof}
-Since $A$ is real, $\myvector{v}_{\lambda}\in \ker{(A-\lambda I)}^{k}$
+Since $A$ is real, $\myvector{v}_{\lambda}\in \ker{(A-\lambda I)}^{m}$
   implies that
   $\overline{\myvector{v}_{\lambda}} \in \ker{(A-\overline{\lambda}
-  I)}^{k}$
+  I)}^{m}$
   and hence that
   $\overline{ \myvector{v}_{ \overline{\lambda}}} \in
   \mathcal{V}_{\lambda}$.  The result follows from the fact that
@@ -95,16 +95,16 @@ dimension of the largest Jordan block associated with it.
 One can obtain a closed-form expression for powers of block diagonal
 Jordan matrices, and use this to get a closed-form expression for
 the powers of any matrix $A$. In fact, if $J_{i}$ is a
-$k\times k$ Jordan block associated with an eigenvalue $\lambda$,
+$l\times l$ Jordan block associated with an eigenvalue $\lambda$,
 then
 %\noindent
 \begin{equation}
 \label{eq:jordan_powers}
 J_{i}^{n}=\begin{pmatrix}
 \lambda^{n}	&&	n\lambda^{n-1}	&&	{n\choose 2}\lambda^{n-1}	&&
-\cdots		&&	{n\choose k-1}\lambda^{n-k+1}				\\
+\cdots		&&	{n\choose l-1}\lambda^{n-l+1}				\\
 0			&&	\lambda^{n}		&&	n\lambda^{n-1}				&&
-\cdots		&&	{n\choose k-2}\lambda^{n-k+2}				\\
+\cdots		&&	{n\choose l-2}\lambda^{n-l+2}				\\
 \vdots	&&	\vdots	&&	\vdots	&&	\ddots	&&	\vdots			\\
 0		&&	0		&&	0		&&	\cdots	&&	n\lambda^{n-1}	\\
 0		&&	0		&&	0		&&	\cdots	&&	\lambda^{n}		\\
